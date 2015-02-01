@@ -1,5 +1,5 @@
 /**
- * Default Content-type은 application/x-www-form-urlencoded이다.
+ * Default Content-type은 application/x-www-form-urlencoded
 **/
 
 var asyncHttpModule = angular.module('asyncHttpModule', []);

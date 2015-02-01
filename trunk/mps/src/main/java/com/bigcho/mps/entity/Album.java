@@ -37,6 +37,9 @@ public class Album {
 	@Column
 	private String title;
 	
+	@Column
+	private String description;
+	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="album")
 	private Set<Youtube> youtubes;
 }

@@ -1,67 +1,62 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script>
+  if (typeof angular == 'undefined')
+     window.location.replace("/mps");
+</script>
 
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<c:set var="resourcePath" value="${pageContext.request.contextPath}/resources" />
-
-<html data-ng-app="JukeTubeApp">
-  <head>
-    <meta charset="utf-8"> 
-    <title>JukeTube</title>
-    <meta name="author" content="J. Thomas">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="style.css" type="text/css">
-    <link rel="icon" href="/favicon.ico">
-  </head>
-  <body data-ng-controller="VideosController">
-    <header>
-      <h1>Juke<strong>Tube</strong></h1>
-      <form id="search" data-ng-submit="search()">
-        <input id="query" name="q" type="text" placeholder="Search for a YouTube video" data-ng-model="query">
-        <input id="submit" type="image" src="search.png" alt="Search">
-      </form>
-      <nav>
-        <a id="play">{{ youtube.state }}</a>
-        <a id="pause">Pause</a>
-      </nav>
-    </header>
-    <div id="results">
-      <div class="video" data-ng-repeat="video in results" data-ng-click="queue(video.id, video.title)">
-        <img class="video-image" data-ng-src="{{ video.thumbnail }}">
-        <p class="video-title">{{ video.title }}</p>
-        <p class="video-author">{{ video.author }}</p>
-        <p class="video-description">{{ video.description }}</p>
-      </div>
-    </div>
-    <div id="player">
-      <div id="placeholder"></div>
-    </div>
-    <div id="playlist">
-      <p id="current">{{ youtube.videoTitle }}</p>
-      <ol id="upcoming" data-ng-show="playlist">
-        <li data-ng-repeat="video in upcoming">
-          <p class="item-delete" data-ng-click="delete('upcoming', video.id)">delete</p>
-          <p class="item-title" data-ng-click="launch(video.id, video.title)">{{video.title}}</p>
-        </li>
-      </ol>
-      <ol id="history" data-ng-hide="playlist">
-        <li data-ng-repeat="video in history">
-          <p class="item-delete" data-ng-click="delete('history', video.id)">delete</p>
-          <p class="item-title" data-ng-click="queue(video.id, video.title)">{{video.title}}</p>
-        </li>
-      </ol>
-      <p id="tabs">
-        <a ng-class="{on:playlist}" data-ng-click="tabulate(true)">Upcoming</a>
-        <a ng-class="{on:!playlist}" data-ng-click="tabulate(false)">History</a>
-      </p>
-    </div>
-    <footer>
-      <em>Concept &amp; Design: <a href="http://jgthms.com">J. Thomas</a></em>
-      Built with <a href="http://angularjs.org/">AngularJS</a>. Source code available on <a href="https://github.com/jgthms/juketube">GitHub</a>.
-    </footer>
-    <script src="angular.min.js"></script>
-    <script src="angular-local-storage.js"></script>
-    <script src="app.js"></script>
-  </body>
-</html>
+<aside class="right-side" ng-controller="albumListCtrl">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+	    <h1>
+	        Album List
+	        <small>Album List</small>
+	    </h1>
+	    <ol class="breadcrumb">
+	        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+	        <li><a href="#">Album</a></li>
+	    </ol>
+	</section>
+	
+	<section class="content">
+	    <div class="row">
+	        <div class="col-xs-12">
+	            <div class="box">
+	                <div class="box-header">
+	                    <h3 class="box-title">Click to Album List</h3>
+	                    <!--
+	                    <div class="box-tools">
+	                        <div class="input-group">
+	                            <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
+	                            <div class="input-group-btn">
+	                                <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    -->
+	                </div><!-- /.box-header -->
+	                <div class="box-body table-responsive no-padding">
+	                    <table class="table table-hover">
+	                        <tr>
+	                            <th>Id</th>
+	                            <th>Title</th>
+	                            <th>Description</th>
+	                            <th>Action</th>
+	                        </tr>
+	                        <tr style="cursor:pointer">
+	                            <td>183</td>
+	                            <td>John Doe</td>
+	                            <td>11-7-2014</td>
+	                            <td>
+	                            	<span class="label label-primary">Play</span>
+	                            	<span class="label label-danger">Stop</span>
+	                            </td>
+	                        </tr>
+	                    </table>
+	                </div><!-- /.box-body -->
+	            </div><!-- /.box -->
+	            <div class="box-footer clearfix">
+                   <button class="btn btn-default btn-sm" ng-click="moveChoutube()">Move Choutube</button>
+                </div>
+	        </div>
+	    </div>
+	</section>
+</aside>

@@ -14,6 +14,8 @@ mpsApp.config(function($routeProvider, $locationProvider) {
 	$routeProvider.otherwise({
 		templateUrl: window.mps.contextPath + '/dashboard/main'
 	});
+	
+	 
 });
 
 

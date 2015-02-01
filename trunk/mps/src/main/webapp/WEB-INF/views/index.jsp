@@ -220,10 +220,9 @@
                 </section>
                 <!-- /.sidebar -->
             </aside>
-            <!-- Right side column. Contains the navbar and content of the page -->
-            <aside class="right-side">
-	            <ng-view></ng-view>
-            </aside><!-- /.right-side -->
+            
+	        <ng-view></ng-view>
+            
         </div><!-- ./wrapper -->
     </body>
 </html>
