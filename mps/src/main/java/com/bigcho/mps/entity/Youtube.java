@@ -38,8 +38,9 @@ public class Youtube {
 	
 	@Column
 	private String title;
-	
+		
 	@ManyToOne(fetch=FetchType.LAZY, optional=false)
 	@JoinColumn(name="albumId")
 	private Album album;
+	
 }

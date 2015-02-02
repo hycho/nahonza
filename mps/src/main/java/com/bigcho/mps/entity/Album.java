@@ -42,4 +42,5 @@ public class Album {
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="album")
 	private Set<Youtube> youtubes;
+
 }
