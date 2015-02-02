@@ -32,7 +32,7 @@ choutubeApp.service('VideosService', ['$window', '$rootScope', '$log', function 
 	var results = [];
 	  
 	var upcoming = [
-	    //{id: 'kRJuY6ZDLPo', title: 'La Roux - In for the Kill (Twelves Remix)'}
+	    {id: 'kRJuY6ZDLPo', title: 'La Roux - In for the Kill (Twelves Remix)'}
 	];
   
 	$window.onYouTubeIframeAPIReady = function () {
@@ -173,7 +173,7 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
 	
 	$scope.save = function () {
 		$log.info('getUpcoming = ');
-	    $log.info(service.getUpcoming());
+	    $log.info(VideosService.getUpcoming());
 	};
 	
     $scope.launch = function (id, title, idx) {
@@ -211,10 +211,6 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
         $log.info('Search error');
       });
     }
-
-    $scope.tabulate = function (state) {
-      $scope.playlist = state;
-    }
     
     init();
 
@@ -222,7 +218,6 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
       $scope.youtube = VideosService.getYoutube();
       $scope.results = VideosService.getResults();
       $scope.upcoming = VideosService.getUpcoming();
-      $scope.playlist = true;
       $scope.search();
     }
 });

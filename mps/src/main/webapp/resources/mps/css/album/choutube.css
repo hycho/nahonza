@@ -53,9 +53,12 @@ nav{ float: right; line-height: 40px; text-align: center; width: 240px;}
 #history .item-title:hover{ background: #33522d; color: white;}
 #tabs, #tabs a{ background: #333; height: 64px; left: 0; line-height: 64px; position: absolute; text-align: center; width: 100%;}
 #tabs{ bottom: 0;}
-#tabs a{ color: #666; width: 50%;}
+#tabs a{ color: #FFF; width: 50%;}
 #tabs a:last-child{ left: 50%;}
-#tabs .on{ background: #22242a; color: white;}
+#tabs .green {background: #4CB872}
+#tabs .green:hover {background: #65E491}
+#tabs .blue {background: #789DD3}
+#tabs .blue:hover {background: #94C0FF}
 
 footer{ color: #888; font-size: 16px; padding: 20px 0; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);}
 footer em{ float: right; font-style: normal;}
