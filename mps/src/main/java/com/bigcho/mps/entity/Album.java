@@ -15,7 +15,6 @@
  */
 package com.bigcho.mps.entity;
 
-import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -46,6 +45,6 @@ public class Album {
 	private String description;
 	
 	@OneToMany(cascade = {CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="album")
-	private Collection<Youtube> youtubes;
+	private Set<Youtube> youtubes;
 
 }

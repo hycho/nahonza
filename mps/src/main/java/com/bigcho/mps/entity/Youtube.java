@@ -43,8 +43,7 @@ public class Youtube {
 	@Column
 	private String title;
 		
-	@ManyToOne(fetch=FetchType.LAZY, cascade={CascadeType.ALL})
-	@JoinColumn(name="albumId", referencedColumnName = "id")
+	@ManyToOne(cascade={CascadeType.ALL})
 	private Album album;
 	
 }
