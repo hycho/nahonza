@@ -29,7 +29,7 @@
 	</header>
 	<div id="results">
 		<div class="video" data-ng-repeat="video in results"
-			data-ng-click="queue(video.id, video.title)">
+			data-ng-click="queue(video.playId, video.title)">
 			<img class="video-image" data-ng-src="{{ video.thumbnail }}">
 			<p class="video-title">{{ video.title }}</p>
 			<p class="video-author">{{ video.author }}</p>
@@ -43,8 +43,8 @@
 		<p id="current">{{ youtube.videoTitle }}</p>
 		<ol id="upcoming">
 			<li data-ng-repeat="video in upcoming">
-				<p class="item-delete" data-ng-click="delete('upcoming', video.id)">delete</p>
-				<p class="item-title" ng-class="{'selected': $index==sels.selTitleIdx}" data-ng-click="launch(video.id, video.title, $index); sels.selTitleIdx = $index">{{video.title}}</p>
+				<p class="item-delete" data-ng-click="delete('upcoming', video.playId)">delete</p>
+				<p class="item-title" ng-class="{'selected': $index==sels.selTitleIdx}" data-ng-click="launch(video.playId, video.title, $index); sels.selTitleIdx = $index">{{video.title}}</p>
 			</li>
 		</ol>
 		<p id="tabs">
@@ -53,6 +53,8 @@
 		</p>
 	</div>
 	<script src="${resourcePath}/js/plugins/angularjs/angular.min-1.3.8.js"></script>
+	<script src="${resourcePath}/js/plugins/angular-bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
 	<script src="${resourcePath}/js/album/choutube.js"></script>
+	<script src="${resourcePath}/js/common/asyncHttpModule.js"></script>
 </body>
 </html>

@@ -1,4 +1,8 @@
-var choutubeApp = angular.module('choutubeApp', []);
+/**
+ * addon asyncHttpModule.js(비동기 호출 모듈)
+ */
+
+var choutubeApp = angular.module('choutubeApp', ['asyncHttpModule']);
 
 // Run
 choutubeApp.run(function () {
@@ -17,6 +21,8 @@ choutubeApp.config( function ($httpProvider) {
 choutubeApp.service('VideosService', ['$window', '$rootScope', '$log', function ($window, $rootScope, $log) {
 	var service = this;
 	
+	var album = {};
+	
 	var youtube = {
 	    ready: false,
 	    player: null,
@@ -32,7 +38,7 @@ choutubeApp.service('VideosService', ['$window', '$rootScope', '$log', function 
 	var results = [];
 	  
 	var upcoming = [
-	    {id: 'kRJuY6ZDLPo', title: 'La Roux - In for the Kill (Twelves Remix)'}
+	    {playId: 'kRJuY6ZDLPo', title: 'La Roux - In for the Kill (Twelves Remix)'}
 	];
   
 	$window.onYouTubeIframeAPIReady = function () {
@@ -45,8 +51,8 @@ choutubeApp.service('VideosService', ['$window', '$rootScope', '$log', function 
 
 	function onYoutubeReady (event) {
 	    $log.info('YouTube Player is ready');
-	    youtube.player.cueVideoById(upcoming[0].id);
-	    youtube.videoId = upcoming[0].id;
+	    youtube.player.cueVideoById(upcoming[0].playId);
+	    youtube.videoId = upcoming[0].playId;
 	    youtube.videoTitle = upcoming[0].title;
 	}
 
@@ -68,7 +74,7 @@ choutubeApp.service('VideosService', ['$window', '$rootScope', '$log', function 
 			youtube.playIdx = 0;
 		}
 
-		service.launchPlayer(upcoming[youtube.playIdx].id, upcoming[youtube.playIdx].title);
+		service.launchPlayer(upcoming[youtube.playIdx].playId, upcoming[youtube.playIdx].title);
 	    
 	    $rootScope.$broadcast("VideosController::selTitle", youtube.playIdx);
 	};
@@ -118,7 +124,7 @@ choutubeApp.service('VideosService', ['$window', '$rootScope', '$log', function 
     results.length = 0;
     for (var i = data.items.length - 1; i >= 0; i--) {
       results.push({
-        id: data.items[i].id.videoId,
+        playId: data.items[i].id.videoId,
         title: data.items[i].snippet.title,
         description: data.items[i].snippet.description,
         thumbnail: data.items[i].snippet.thumbnails.default.url,
@@ -130,15 +136,16 @@ choutubeApp.service('VideosService', ['$window', '$rootScope', '$log', function 
 
   this.queueVideo = function (id, title) {
     upcoming.push({
-      id: id,
+      playId: id,
       title: title
     });
     return upcoming;
   };
 
   this.deleteVideo = function (list, id) {
+	  console.log(id)
     for (var i = list.length - 1; i >= 0; i--) {
-      if (list[i].id === id) {
+      if (list[i].playId === id) {
         list.splice(i, 1);
         break;
       }
@@ -156,12 +163,20 @@ choutubeApp.service('VideosService', ['$window', '$rootScope', '$log', function 
   this.getUpcoming = function () {
     return upcoming;
   };
+  
+  this.getAlbum = function () {
+	  return album;
+  };
 
+  this.setAlbum = function(pAlbum) {
+	  album = pAlbum;
+  };
+  
 }]);
 
 // Controller
 
-choutubeApp.controller('VideosController', function ($scope, $http, $log, VideosService) {
+choutubeApp.controller('VideosController', function ($scope, $http, $log, VideosService, asyncHttpService) {
 	$scope.query = 'you got it';
 	$scope.sels = {
 		selTitleIdx : -1
@@ -171,9 +186,23 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
 		$scope.sels.selTitleIdx = idx;
 	});
 	
-	$scope.save = function () {
+	$scope.save = function() {
 		$log.info('getUpcoming = ');
 	    $log.info(VideosService.getUpcoming());
+	    $log.info('getAlbum = ');
+	    if(!VideosService.getAlbum().id) {
+	    	var title = prompt("Please enter your album title", "sr-71");
+	    	
+	    	if(title !== '') {
+	    		alert(title);
+	    	}
+	    }
+	    
+	    //VideosService.setA
+	};
+	
+	$scope.recommend = function() {
+		
 	};
 	
     $scope.launch = function (id, title, idx) {
@@ -191,25 +220,25 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
     $scope.delete = function (list, id) {
       VideosService.deleteVideo($scope.upcoming, id);
     };
-
+    
     $scope.search = function () {
-      $http.get('https://www.googleapis.com/youtube/v3/search', {
-        params: {
-          key: 'AIzaSyCcXyPQpQ79ay56baFrmEDFTKPgUv9TSZw',
-          type: 'video',
-          maxResults: '20',
-          part: 'id,snippet',
-          fields: 'items/id,items/snippet/title,items/snippet/description,items/snippet/thumbnails/default,items/snippet/channelTitle',
-          q: $scope.query
-        }
-      })
-      .success( function (data) {
-        VideosService.listResults(data);
-        $log.info(data);
-      })
-      .error( function () {
-        $log.info('Search error');
-      });
+    	asyncHttpService.httpGet(
+    		'https://www.googleapis.com/youtube/v3/search',
+    		{
+    	        params: {
+    	          key: 'AIzaSyCcXyPQpQ79ay56baFrmEDFTKPgUv9TSZw',
+    	          type: 'video',
+    	          maxResults: '20',
+    	          part: 'id,snippet',
+    	          fields: 'items/id,items/snippet/title,items/snippet/description,items/snippet/thumbnails/default,items/snippet/channelTitle',
+    	          q: $scope.query
+    	        }
+    	    },
+    	    function(data) {
+    	    	VideosService.listResults(data);
+    	        $log.info(data);
+    	    }
+    	);
     }
     
     init();
