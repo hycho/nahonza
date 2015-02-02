@@ -41,21 +41,15 @@
 	</div>
 	<div id="playlist">
 		<p id="current">{{ youtube.videoTitle }}</p>
-		<ol id="upcoming" data-ng-show="playlist">
+		<ol id="upcoming">
 			<li data-ng-repeat="video in upcoming">
 				<p class="item-delete" data-ng-click="delete('upcoming', video.id)">delete</p>
 				<p class="item-title" ng-class="{'selected': $index==sels.selTitleIdx}" data-ng-click="launch(video.id, video.title, $index); sels.selTitleIdx = $index">{{video.title}}</p>
 			</li>
 		</ol>
-		<ol id="history" data-ng-hide="playlist">
-			<li data-ng-repeat="video in history">
-				<p class="item-delete" data-ng-click="delete('history', video.id)">delete</p>
-				<p class="item-title" data-ng-click="queue(video.id, video.title)">{{video.title}}</p>
-			</li>
-		</ol>
 		<p id="tabs">
-			<a ng-class="{on:playlist}" data-ng-click="tabulate(true)">Upcoming</a>
-			<a ng-class="{on:!playlist}" data-ng-click="tabulate(false)">History</a>
+			<a class="green" data-ng-click="save()">Save</a>
+			<a class="blue" data-ng-click="recommend()">Recommend</a>
 		</p>
 	</div>
 	<script src="${resourcePath}/js/plugins/angularjs/angular.min-1.3.8.js"></script>
