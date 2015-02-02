@@ -192,14 +192,19 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
 	    $log.info('getAlbum = ');
 	    if(!VideosService.getAlbum().id) {
 	    	var title = prompt("Please enter your album title", "sr-71");
+	    	
 	    	if(title !== '') {
-	    		var params = {
-	    			youtubes : VideosService.getUpcoming(),
-	    			title : title,
-	    			description : ''
-	    		}
+	    		var album = {
+	    	    	title : title
+	    	    }
 	    		
-	    		asyncHttpService.httpPostJson(window.mps.contextPath + '/album/save', params, function(data) {
+	    		angular.forEach(VideosService.getUpcoming(), function(value) {
+	    			  value['album'] = album;
+	    		});
+	    		
+	    		console.log(VideosService.getUpcoming());
+	    		
+	    		asyncHttpService.httpPostJson(window.mps.contextPath + '/album/save1', VideosService.getUpcoming(), function(data) {
 	    			alert(data);
 	    		});
 	    	} else {
@@ -235,7 +240,8 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
     		'https://www.googleapis.com/youtube/v3/search',
     		{
     	        params: {
-    	          key: 'AIzaSyCcXyPQpQ79ay56baFrmEDFTKPgUv9TSZw',
+    	          //key: 'AIzaSyCcXyPQpQ79ay56baFrmEDFTKPgUv9TSZw',
+    	          key: 'AIzaSyCx_-DPip0Gt6lXn6ixuKczI7EXAyc2tIE',
     	          type: 'video',
     	          maxResults: '20',
     	          part: 'id,snippet',
