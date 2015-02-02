@@ -15,6 +15,7 @@
  */
 package com.bigcho.mps.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,6 +26,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name="tbl_youtube")
 public class Youtube {
@@ -39,8 +43,8 @@ public class Youtube {
 	@Column
 	private String title;
 		
-	@ManyToOne(fetch=FetchType.LAZY, optional=false)
-	@JoinColumn(name="albumId")
+	@ManyToOne(fetch=FetchType.LAZY, cascade={CascadeType.ALL})
+	@JoinColumn(name="albumId", referencedColumnName = "id")
 	private Album album;
 	
 }

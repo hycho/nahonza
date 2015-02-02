@@ -56,5 +56,13 @@
 	<script src="${resourcePath}/js/plugins/angular-bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
 	<script src="${resourcePath}/js/album/choutube.js"></script>
 	<script src="${resourcePath}/js/common/asyncHttpModule.js"></script>
+	<script type="text/javascript">
+    	if (!window.mps) {
+       		window.mps = {
+       			contextPath : '${contextPath}',
+       			resourcePath : '${resourcePath}'
+       		}
+       	}
+    </script>
 </body>
 </html>

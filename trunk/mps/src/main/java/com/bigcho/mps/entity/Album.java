@@ -15,8 +15,10 @@
  */
 package com.bigcho.mps.entity;
 
+import java.util.Collection;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,6 +28,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name="tbl_album")
 public class Album {
@@ -40,7 +45,7 @@ public class Album {
 	@Column
 	private String description;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="album")
-	private Set<Youtube> youtubes;
+	@OneToMany(cascade = {CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="album")
+	private Collection<Youtube> youtubes;
 
 }
