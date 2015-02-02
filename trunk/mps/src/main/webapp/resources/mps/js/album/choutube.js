@@ -35,10 +35,6 @@ choutubeApp.service('VideosService', ['$window', '$rootScope', '$log', function 
 	    //{id: 'kRJuY6ZDLPo', title: 'La Roux - In for the Kill (Twelves Remix)'}
 	];
   
-	var history = [
-	    {id: 'XKa7Ywiv734', title: '[OFFICIAL HD] Daft Punk - Give Life Back To Music (feat. Nile Rodgers)'}
-	];
-
 	$window.onYouTubeIframeAPIReady = function () {
 	    $log.info('Youtube API is ready');
 	    youtube.ready = true;
@@ -49,9 +45,9 @@ choutubeApp.service('VideosService', ['$window', '$rootScope', '$log', function 
 
 	function onYoutubeReady (event) {
 	    $log.info('YouTube Player is ready');
-	    youtube.player.cueVideoById(history[0].id);
-	    youtube.videoId = history[0].id;
-	    youtube.videoTitle = history[0].title;
+	    youtube.player.cueVideoById(upcoming[0].id);
+	    youtube.videoId = upcoming[0].id;
+	    youtube.videoTitle = upcoming[0].title;
 	}
 
 	function onYoutubeStateChange (event) {
@@ -73,7 +69,6 @@ choutubeApp.service('VideosService', ['$window', '$rootScope', '$log', function 
 		}
 
 		service.launchPlayer(upcoming[youtube.playIdx].id, upcoming[youtube.playIdx].title);
-	    service.archiveVideo(upcoming[youtube.playIdx].id, upcoming[youtube.playIdx].title);
 	    
 	    $rootScope.$broadcast("VideosController::selTitle", youtube.playIdx);
 	};
@@ -141,14 +136,6 @@ choutubeApp.service('VideosService', ['$window', '$rootScope', '$log', function 
     return upcoming;
   };
 
-  this.archiveVideo = function (id, title) {
-    history.unshift({
-      id: id,
-      title: title
-    });
-    return history;
-  };
-
   this.deleteVideo = function (list, id) {
     for (var i = list.length - 1; i >= 0; i--) {
       if (list[i].id === id) {
@@ -170,10 +157,6 @@ choutubeApp.service('VideosService', ['$window', '$rootScope', '$log', function 
     return upcoming;
   };
 
-  this.getHistory = function () {
-    return history;
-  };
-
 }]);
 
 // Controller
@@ -188,9 +171,13 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
 		$scope.sels.selTitleIdx = idx;
 	});
 	
+	$scope.save = function () {
+		$log.info('getUpcoming = ');
+	    $log.info(service.getUpcoming());
+	};
+	
     $scope.launch = function (id, title, idx) {
       VideosService.launchPlayer(id, title);
-      VideosService.archiveVideo(id, title);
       VideosService.getYoutube().playIdx = idx;
       
       $log.info('Launched id:' + id + ' and title:' + title);
@@ -235,7 +222,6 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
       $scope.youtube = VideosService.getYoutube();
       $scope.results = VideosService.getResults();
       $scope.upcoming = VideosService.getUpcoming();
-      $scope.history = VideosService.getHistory();
       $scope.playlist = true;
       $scope.search();
     }
