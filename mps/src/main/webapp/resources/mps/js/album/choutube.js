@@ -192,12 +192,21 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
 	    $log.info('getAlbum = ');
 	    if(!VideosService.getAlbum().id) {
 	    	var title = prompt("Please enter your album title", "sr-71");
-	    	
 	    	if(title !== '') {
-	    		alert(title);
+	    		var params = {
+	    			youtubes : VideosService.getUpcoming(),
+	    			title : title,
+	    			description : ''
+	    		}
+	    		
+	    		asyncHttpService.httpPostJson(window.mps.contextPath + '/album/save', params, function(data) {
+	    			alert(data);
+	    		});
+	    	} else {
+	    		alert('check title !');
+	    		return;
 	    	}
 	    }
-	    
 	    //VideosService.setA
 	};
 	
