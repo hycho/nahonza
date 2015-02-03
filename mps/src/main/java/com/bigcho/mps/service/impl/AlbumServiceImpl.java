@@ -25,12 +25,6 @@ public class AlbumServiceImpl implements AlbumService {
 	@Override
 	@Transactional(value = "transactionManager", rollbackFor=Exception.class)
 	public Album saveAlbum(Album album) {
-//		Collection<Youtube> youtubes = album.getYoutubes();
-//		List<Youtube> youtubeList = new ArrayList<Youtube>();
-//		for(Youtube youtube : youtubes) {
-//			youtubeList.add(youtubeRep.save(youtube));
-//		}
-//		album.setYoutubes(youtubeList);
 		return albumRep.save(album);
 	}
 }

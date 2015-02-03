@@ -36,15 +36,8 @@ public class AlbumController {
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public @ResponseBody Album save(@RequestBody Album album) {
-		return albumService.saveAlbum(album);
-	}
-	
-	@RequestMapping(value = "/save1", method = RequestMethod.POST)
-	public @ResponseBody List<Youtube> save1(@RequestBody List<Youtube> youtubes) {
+	public @ResponseBody List<Youtube> save(@RequestBody List<Youtube> youtubes) {
 		return youtubeService.saveYoutube(youtubes);
 	}
-	
-	
 	
 }
