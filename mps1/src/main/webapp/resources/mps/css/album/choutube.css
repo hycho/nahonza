@@ -15,7 +15,7 @@ a{ cursor: pointer;}
 body, input{ font: 20px/1 'Montserrat', Arial, sans-serif;}
 h1 strong, #playlist, .video-title{ font-family: 'Montserrat', Arial, sans-serif; font-weight: bold; }
 
-header{ background: #4CB872; color: white; height: 40px; padding: 20px 0;}
+header{ background: #4CB872; color: white; height: 40px; padding: 20px 0; position: absolute; z-index:1}
 h1{ float: left; line-height: 40px; text-align: center; width: 160px;}
 #search{ float: left; height: 40px; position: relative; width: 880px;}
 #query{ background: #CBFFBD; border: none; border-radius: 20px; color: rgb(63, 92, 136); float: left; height: 30px; line-height: 30px; padding: 5px 20px; width: 840px;}
@@ -23,9 +23,12 @@ h1{ float: left; line-height: 40px; text-align: center; width: 160px;}
 #submit{ position: absolute; right: 10px; top: 5px;}
 nav{ float: right; line-height: 40px; text-align: center; width: 240px;}
 #play, #pause{ cursor: pointer;}
-#pause{ display: none;}
+#playType{ margin-right: 20px;}
+.suffle { color: #AFE8F9;}
+.repeat { color: #DEFD82;}
+.random { color: #F9ADA7;}
 
-#results{ background: #f2f5fd; background: #f5f5f5; height: 944px; overflow-x: hidden; width: 640px;}
+#results{ background: #f2f5fd; background: #f5f5f5; height: 944px; overflow-x: hidden; width: 640px; position: absolute; top: 80px;}
 .video{ cursor: pointer; min-height: 90px; padding: 10px; padding-left: 140px; position: relative;}
 .video:nth-child(2n-1){ background: white;}
 .video-image{ float: left; left: 10px; position: absolute; top: 10px;}
