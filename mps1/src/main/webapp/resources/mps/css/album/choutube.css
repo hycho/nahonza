@@ -23,7 +23,7 @@ h1{ float: left; line-height: 40px; text-align: center; width: 160px;}
 #submit{ position: absolute; right: 10px; top: 5px;}
 nav{ float: right; line-height: 40px; text-align: center; width: 240px;}
 #play, #pause{ cursor: pointer;}
-#playType{ margin-right: 20px;}
+#playType{ margin-right: 25px; margin-left: -20px;}
 .suffle { color: #AFE8F9;}
 .repeat { color: #DEFD82;}
 .random { color: #F9ADA7;}
