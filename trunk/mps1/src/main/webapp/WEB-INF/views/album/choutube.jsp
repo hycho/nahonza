@@ -13,10 +13,19 @@
 <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="${resourcePath}/css/album/choutube.css" type="text/css">
 <link rel="icon" href="/favicon.ico">
+<script>
+  	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  	ga('create', 'UA-54984077-1', 'auto');
+  	ga('send', 'pageview');
+</script>
 </head>
 <body data-ng-controller="VideosController">
 	<input id="albumId" name="albumId" type="hidden" value="${albumId}" />
-	<header>
+	<header id="searchHeader">
 		<h1>
 			Chou<strong>Tube</strong>
 		</h1>
@@ -25,12 +34,11 @@
 			<input id="submit" type="image" src="${resourcePath}/img/search.png" alt="Search">
 		</form>
 		<nav>
-			<a id="play">{{ youtube.state }}</a> <a id="pause">Pause</a>
+			<a id="playType" ng-class="playType" ng-click="nextPlayType()">{{playType}}</a> <a id="play">{{ youtube.state }}</a>
 		</nav>
 	</header>
 	<div id="results">
-		<div class="video" data-ng-repeat="video in results"
-			data-ng-click="queue(video.playId, video.title)">
+		<div class="video" data-ng-repeat="video in results" data-ng-click="queue(video.playId, video.title)">
 			<img class="video-image" data-ng-src="{{ video.thumbnail }}">
 			<p class="video-title">{{ video.title }}</p>
 			<p class="video-author">{{ video.author }}</p>
@@ -65,6 +73,10 @@
        			resourcePath : '${resourcePath}'
        		}
        	}
+    	
+      	$(window).scroll(function(){
+    		$("#searchHeader").stop().animate({"marginTop": ($(window).scrollTop()) + "px", "marginLeft":($(window).scrollLeft()) + "px"}, "slow" );
+      	});
     </script>
 </body>
 </html>

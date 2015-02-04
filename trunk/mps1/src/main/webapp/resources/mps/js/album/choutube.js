@@ -20,8 +20,18 @@ choutubeApp.config( function ($httpProvider) {
 // Service
 choutubeApp.service('VideosService', ['$window', '$rootScope', '$log', function ($window, $rootScope, $log) {
 	var service = this;
+	var typeIdx = 0;
+	var album = {
+		albumId : ""
+	};
 	
-	var album = {};
+	var playTypes = [
+	    "repeat",
+	    "suffle",
+	    "random"
+	];
+	
+	var playType = playTypes[typeIdx];
 	
 	var youtube = {
 	    ready: false,
@@ -61,7 +71,14 @@ choutubeApp.service('VideosService', ['$window', '$rootScope', '$log', function 
 	    	youtube.state = 'paused';
 	    } else if (event.data == YT.PlayerState.ENDED) {
 		    youtube.state = 'ended';
-		    nextPlay();
+
+		    if(playType == 'repeat') {
+		    	nextPlay();
+		    } else if(playType == 'suffle') {
+		    	sufflePlay();
+		    } else {
+		    	randomPlay();
+		    }
 	    }
 	    $rootScope.$apply();
 	}
@@ -70,14 +87,19 @@ choutubeApp.service('VideosService', ['$window', '$rootScope', '$log', function 
 		if(upcoming.length <= ++youtube.playIdx) {
 			youtube.playIdx = 0;
 		}
-
 		service.launchPlayer(upcoming[youtube.playIdx].playId, upcoming[youtube.playIdx].title);
-	    
 	    $rootScope.$broadcast("VideosController::selTitle", youtube.playIdx);
 	};
 	
 	function sufflePlay() {
-		
+		service.launchPlayer(upcoming[youtube.playIdx].playId, upcoming[youtube.playIdx].title);
+	    $rootScope.$broadcast("VideosController::selTitle", youtube.playIdx);
+	};
+	
+	function randomPlay() {
+		youtube.playIdx = Math.floor(Math.random() * upcoming.length);
+		service.launchPlayer(upcoming[youtube.playIdx].playId, upcoming[youtube.playIdx].title);
+	    $rootScope.$broadcast("VideosController::selTitle", youtube.playIdx);
 	};
 
 	this.bindPlayer = function (elementId) {
@@ -163,9 +185,25 @@ choutubeApp.service('VideosService', ['$window', '$rootScope', '$log', function 
   this.getAlbum = function () {
 	  return album;
   };
-
-  this.setAlbum = function(pAlbum) {
+  
+  this.setAlbum = function (pAlbum) {
 	  album = pAlbum;
+  };
+  
+  this.getPlayTypes = function() {
+	  return playType;
+  };
+  
+  this.getPlayType = function() {
+	  return playType;
+  };
+  
+  this.nextPlayType = function() {
+	if(++typeIdx >= playTypes.length){
+		typeIdx = 0;
+	}
+	playType = playTypes[typeIdx];
+	return playType;
   };
   
 }]);
@@ -178,42 +216,48 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
 		selTitleIdx : -1
 	};
 	$scope.albumId = "";
+	$scope.playType = VideosService.getPlayType();
+	
 	
 	$scope.$on("VideosController::selTitle", function(event, idx) {
 		$scope.sels.selTitleIdx = idx;
 	});
 	
+	$scope.nextPlayType = function() {
+		$scope.playType = VideosService.nextPlayType(); 
+	};
+	
 	$scope.save = function() {
-		$log.info('getUpcoming = ');
-	    $log.info(VideosService.getUpcoming());
-	    $log.info('getAlbum = ');
-	    if(!VideosService.getAlbum().id) {
+		var album = VideosService.getAlbum(); 
+
+		if(VideosService.getAlbum().albumId == '') {
 	    	var title = prompt("Please enter your album title", "sr-71");
 	    	
+	    	if(title == null) {
+	    		return;
+	    	}
+	    	
 	    	if(title !== '') {
-	    		var album = {
+	    		album = {
 	    	    	"title" : title,
-	    	    	"description" : title
+	    	    	"description" : title,
+	    	    	"youtubes" : VideosService.getUpcoming()
 	    	    }
-	    		
-	    		angular.forEach(VideosService.getUpcoming(), function(value) {
-	    			value['album'] = album;
-	    		});
-	    		
-	    		var params = {
-	    			"title" : title,
-	    			"youtubes" : VideosService.getUpcoming()
-	    		}
-	    		
-	    		
-	    		asyncHttpService.httpPostJson(window.mps.contextPath + '/album/saveAlbum', params, function(data) {
-	    			alert("complete save");
-	    		});
 	    	} else {
 	    		alert('check title !');
 	    		return;
 	    	}
+	    } else {
+	    	album['youtubes'] = VideosService.getUpcoming();
 	    }
+		
+		asyncHttpService.httpPostJson(window.mps.contextPath + '/album/saveAlbum', album, function(data) {
+			alert("complete save");
+		});
+	};
+	
+	$scope.saveAs = function() {
+		
 	};
 	
 	$scope.recommend = function() {
@@ -241,8 +285,8 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
     		'https://www.googleapis.com/youtube/v3/search',
     		{
     	        params: {
-    	          //key: 'AIzaSyCcXyPQpQ79ay56baFrmEDFTKPgUv9TSZw',
-    	          key: 'AIzaSyCx_-DPip0Gt6lXn6ixuKczI7EXAyc2tIE',
+    	          key: 'AIzaSyCcXyPQpQ79ay56baFrmEDFTKPgUv9TSZw',
+    	          //key: 'AIzaSyCx_-DPip0Gt6lXn6ixuKczI7EXAyc2tIE',
     	          type: 'video',
     	          maxResults: '20',
     	          part: 'id,snippet',
@@ -259,6 +303,7 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
     
     $scope.bindByAlbum = function(albumId) {
     	asyncHttpService.httpPost(window.mps.contextPath + '/album/findByAlbumId', {'albumId':albumId}, function(data) {
+    		VideosService.setAlbum(data);
     		angular.forEach(data.youtubes, function(value) {
     			VideosService.queueVideo(value.playId, value.title);
     		});
