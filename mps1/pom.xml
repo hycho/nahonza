@@ -170,6 +170,13 @@
 			<version>${org.projectlombok.lombok-version}</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- Json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20141113</version>
+		</dependency>
 
 		<!-- Junit 사용 - 현재 사용 안함 -->
 		<dependency>
