@@ -17,5 +17,6 @@
 
 	<import resource="datasource-context.xml" />
 	<import resource="batch-context.xml" />
+	<import resource="security-context.xml" />
 
 </beans>
