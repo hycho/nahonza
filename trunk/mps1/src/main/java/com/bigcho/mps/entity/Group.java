@@ -34,48 +34,27 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Data
 @Entity
-@Table(name="tbl_user")
-public class User {
+@Table(name="tbl_group")
+public class Group {
 
 	@Id
 	@Column
 	@GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid2")
-	private String userId;
-	
-	@Column
-	private String id;
-	
-	@Column
-	private String password;
+	private String groupId;
 	
 	@Column
 	private String name;
 	
-	@Column
-	private String description;
-	
-	@Column
-	private String email;
-	
-	@Column
-	private String useFlag;
-	
-	@Column
-    private Date createdDate;
-	
-	@Column
-    private Date updatedDate;
-
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "tbl_user_authority", 
-	           joinColumns = { @JoinColumn(name = "userId") }, 
-	           inverseJoinColumns = { @JoinColumn(name = "authorityCode") })
-	private Collection<Authority> authorities;
-	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "tbl_group_member", 
-	           joinColumns = { @JoinColumn(name = "userId") }, 
-	           inverseJoinColumns = { @JoinColumn(name = "groupId") })
-	private Collection<Group> groups;
+	           joinColumns = { @JoinColumn(name = "groupId") }, 
+	           inverseJoinColumns = { @JoinColumn(name = "userId") })
+	private Collection<User> users;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "tbl_group_authority", 
+	           joinColumns = { @JoinColumn(name = "groupId") }, 
+	           inverseJoinColumns = { @JoinColumn(name = "authorityCode") })
+	private Collection<Authority> authorities;
 }

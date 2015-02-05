@@ -50,5 +50,5 @@ public class Authority {
 	@JoinTable(name = "tbl_user_authority", 
 	           joinColumns = { @JoinColumn(name = "authorityCode") }, 
 	           inverseJoinColumns = { @JoinColumn(name = "userId") })
-	private Collection<User> user; 
+	private Collection<User> users; 
 }

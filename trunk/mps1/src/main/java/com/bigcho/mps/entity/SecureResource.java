@@ -16,8 +16,8 @@
 package com.bigcho.mps.entity;
 
 import java.util.Collection;
-import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,6 +26,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -34,48 +35,36 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Data
 @Entity
-@Table(name="tbl_user")
-public class User {
+@Table(name="tbl_secure_resource")
+public class SecureResource {
 
 	@Id
 	@Column
 	@GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid2")
-	private String userId;
-	
-	@Column
-	private String id;
-	
-	@Column
-	private String password;
+	private String resourceId;
 	
 	@Column
 	private String name;
 	
 	@Column
-	private String description;
+	private String pattern;
 	
 	@Column
-	private String email;
+	private String type;
 	
 	@Column
-	private String useFlag;
+	private int order;
 	
-	@Column
-    private Date createdDate;
-	
-	@Column
-    private Date updatedDate;
-
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "tbl_user_authority", 
-	           joinColumns = { @JoinColumn(name = "userId") }, 
+	@JoinTable(name = "tbl_secure_resource_authority", 
+	           joinColumns = { @JoinColumn(name = "resourceId") }, 
 	           inverseJoinColumns = { @JoinColumn(name = "authorityCode") })
 	private Collection<Authority> authorities;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "tbl_group_member", 
-	           joinColumns = { @JoinColumn(name = "userId") }, 
-	           inverseJoinColumns = { @JoinColumn(name = "groupId") })
-	private Collection<Group> groups;
+	@JoinTable(name = "tbl_secure_resource_authority", 
+	           joinColumns = { @JoinColumn(name = "resourceId") }, 
+	           inverseJoinColumns = { @JoinColumn(name = "userId") })
+	private Collection<User> users;
 }

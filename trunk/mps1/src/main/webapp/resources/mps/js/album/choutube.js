@@ -296,8 +296,8 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
     		'https://www.googleapis.com/youtube/v3/search',
     		{
     	        params: {
-    	          key: 'AIzaSyCcXyPQpQ79ay56baFrmEDFTKPgUv9TSZw',
-    	          //key: 'AIzaSyCx_-DPip0Gt6lXn6ixuKczI7EXAyc2tIE',
+    	          //key: 'AIzaSyCcXyPQpQ79ay56baFrmEDFTKPgUv9TSZw',
+    	          key: 'AIzaSyCx_-DPip0Gt6lXn6ixuKczI7EXAyc2tIE',
     	          type: 'video',
     	          maxResults: '20',
     	          part: 'id,snippet',
