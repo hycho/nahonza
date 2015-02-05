@@ -16,11 +16,10 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.springframework.stereotype.Component;
 
-import CommonUtility.CommonUtility;
-
 import com.bigcho.mps.entity.Album;
 import com.bigcho.mps.entity.Youtube;
 import com.bigcho.mps.service.AlbumService;
+import com.bigcho.mps.util.CommonUtility;
 
 @Component("top100MelonPucher")
 public class Top100MelonPucher {

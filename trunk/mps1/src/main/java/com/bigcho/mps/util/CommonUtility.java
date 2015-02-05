@@ -1,4 +1,4 @@
-package CommonUtility;
+package com.bigcho.mps.util;
 
 import java.io.IOException;
 import java.io.Reader;
