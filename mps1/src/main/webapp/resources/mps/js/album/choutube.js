@@ -234,8 +234,8 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
 	
 	$scope.save = function() {
 		var album = VideosService.getAlbum(); 
-
-		if(VideosService.getAlbum().albumId == '') {
+		console.log(VideosService.getAlbum().albumId);
+		if(typeof VideosService.getAlbum().albumId == 'undefined' || VideosService.getAlbum().albumId == '') {
 	    	var title = prompt("Please enter your album title", "sr-71");
 	    	
 	    	if(title == null) {

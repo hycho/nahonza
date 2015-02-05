@@ -21,6 +21,20 @@
 
   	ga('create', 'UA-54984077-1', 'auto'); //i[r].q = [argument{'create', 'UA-54984077-1', 'auto'}]
   	ga('send', 'pageview'); //i[r].q = [argument{'create', 'UA-54984077-1', 'auto'}, argument{'send', 'pageview'}] //추가
+  	
+  	
+  	(function(iWindow, iDoc, tScript, tJs, rol, iScript, newScript) {
+  		newScript = iDoc.createElement(tScript);
+  		iScript = iDoc.getElementsByTagName(tScript)[0];
+  		newScript.async = 1;
+  		newScript.src = tJs;
+  		iScript.parentNode.insertBefore(newScript, iScript);
+  		iWindow[rol] = iWindow[rol]||function(){
+  		  	(iWindow[rol].arg=iWindow[rol].arg||[]).push(arguments)
+  		 }
+  	})(window, document, 'script', '//localhost:18080/mps/resources/js/analytics/analytics.js', 'ca')
+  	
+  	ca('CA-123456-1'); //userkey 등록
 </script>
 </head>
 <body data-ng-controller="VideosController">
