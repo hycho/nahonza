@@ -16,7 +16,6 @@
 package com.bigcho.mps.entity;
 
 import java.util.Collection;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +30,7 @@ import javax.persistence.Table;
 import lombok.Data;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
 
 @Data
 @Entity

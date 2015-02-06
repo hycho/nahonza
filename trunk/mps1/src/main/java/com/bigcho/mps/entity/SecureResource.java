@@ -17,7 +17,6 @@ package com.bigcho.mps.entity;
 
 import java.util.Collection;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,12 +25,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
 
 @Data
 @Entity
@@ -62,9 +61,4 @@ public class SecureResource {
 	           inverseJoinColumns = { @JoinColumn(name = "authorityCode") })
 	private Collection<Authority> authorities;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "tbl_secure_resource_authority", 
-	           joinColumns = { @JoinColumn(name = "resourceId") }, 
-	           inverseJoinColumns = { @JoinColumn(name = "userId") })
-	private Collection<User> users;
 }

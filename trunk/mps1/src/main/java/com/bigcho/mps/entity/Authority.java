@@ -16,28 +16,31 @@
 package com.bigcho.mps.entity;
 
 import java.util.Collection;
-import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
 
-import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
 
 @Data
 @Entity
 @Table(name="tbl_authority")
-public class Authority {
+public class Authority implements GrantedAuthority{
+
+	private static final long serialVersionUID = 1L;
+	
+	public Authority(){}
+	public Authority(String authorityCode) {
+		this.authorityCode = authorityCode;
+	}
 
 	@Id
 	@Column
@@ -50,5 +53,22 @@ public class Authority {
 	@JoinTable(name = "tbl_user_authority", 
 	           joinColumns = { @JoinColumn(name = "authorityCode") }, 
 	           inverseJoinColumns = { @JoinColumn(name = "userId") })
-	private Collection<User> users; 
+	private Collection<User> users;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "tbl_secure_resource_authority", 
+	           joinColumns = { @JoinColumn(name = "authorityCode") }, 
+	           inverseJoinColumns = { @JoinColumn(name = "resourceId") })
+	private Collection<SecureResource> resources;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "tbl_group_authority", 
+	           joinColumns = { @JoinColumn(name = "authorityCode") }, 
+	           inverseJoinColumns = { @JoinColumn(name = "groupId") })
+	private Collection<Group> groups;
+	
+	@Override
+	public String getAuthority() {
+		return authorityCode;
+	}
 }

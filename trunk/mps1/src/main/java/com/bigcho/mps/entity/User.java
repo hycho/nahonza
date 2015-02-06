@@ -15,9 +15,11 @@
  */
 package com.bigcho.mps.entity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,17 +28,32 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import lombok.Data;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Data
 @Entity
 @Table(name="tbl_user")
-public class User {
+public class User implements UserDetails{
+	
+	private static final long serialVersionUID = 1L;
 
+	public User(){}
+	
+	public User(String userId, String id, String password, String name) {
+		this.userId = userId;
+		this.id = id;
+		this.password = password;
+		this.name = name;
+	}
+	
 	@Id
 	@Column
 	@GeneratedValue(generator="system-uuid")
@@ -67,7 +84,7 @@ public class User {
 	@Column
     private Date updatedDate;
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "tbl_user_authority", 
 	           joinColumns = { @JoinColumn(name = "userId") }, 
 	           inverseJoinColumns = { @JoinColumn(name = "authorityCode") })
@@ -78,4 +95,49 @@ public class User {
 	           joinColumns = { @JoinColumn(name = "userId") }, 
 	           inverseJoinColumns = { @JoinColumn(name = "groupId") })
 	private Collection<Group> groups;
+	
+	@PrePersist
+	private void onCreate() {
+		setCreatedDate(new Date());
+	}
+
+	@PreUpdate
+	private void onUpdate() {
+		setUpdatedDate(new Date());
+	}
+	
+	public void addAuthority(Authority authority) {
+		if(this.authorities == null) {
+			this.authorities = new ArrayList<Authority>();
+		}
+		this.authorities.add(authority);
+	}
+
+	@Override
+	public String getUsername() {
+		return id;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 }
