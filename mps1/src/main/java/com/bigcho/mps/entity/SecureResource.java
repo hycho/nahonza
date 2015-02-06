@@ -15,6 +15,7 @@
  */
 package com.bigcho.mps.entity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -53,12 +54,19 @@ public class SecureResource {
 	private String type;
 	
 	@Column
-	private int order;
+	private int sortOrder;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "tbl_secure_resource_authority", 
 	           joinColumns = { @JoinColumn(name = "resourceId") }, 
 	           inverseJoinColumns = { @JoinColumn(name = "authorityCode") })
 	private Collection<Authority> authorities;
+	
+	public void addAuthority(Authority authority) {
+		if(this.authorities == null) {
+			this.authorities = new ArrayList<Authority>();
+		}
+		this.authorities.add(authority);
+	}
 	
 }

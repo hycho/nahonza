@@ -8,13 +8,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.bigcho.mps.entity.Authority;
+import com.bigcho.mps.entity.SecureResource;
 import com.bigcho.mps.entity.User;
+import com.bigcho.mps.service.SecureResourceService;
 import com.bigcho.mps.service.UserService;
 
 @Component
 public class Initialization {
 	@Resource(name = "userService")
 	private UserService userService;
+	
+	@Resource(name = "secureResourceService")
+	private SecureResourceService secureResourceService;
 	
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
@@ -23,6 +28,7 @@ public class Initialization {
     public void initialize() {
 		//init regist u
 		initializeUser();
+		initializeAuthority();
     }
 	
 	public void initializeUser() {
@@ -40,5 +46,18 @@ public class Initialization {
 		user.addAuthority(author);
 		
 		userService.saveUser(user);
+	}
+	
+	public void initializeAuthority() {
+		Authority author = new Authority();
+		author.setAuthorityCode("ROLE_USER");
+		author.setName("유저 권한");
+		
+		SecureResource sr = new SecureResource();
+		sr.setName("albumUrlA");
+		sr.setPattern("/album/**");
+		sr.setType("url");
+		sr.addAuthority(author);
+		secureResourceService.saveSecureResource(sr);
 	}
 }
