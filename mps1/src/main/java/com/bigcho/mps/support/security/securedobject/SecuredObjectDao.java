@@ -186,7 +186,7 @@ public class SecuredObjectDao {
                 }
             }
 
-            configList.add(new SecurityConfig((String) tempMap.get("authority")));
+            configList.add(new SecurityConfig((String) tempMap.get("authorityCode")));
             
             // 만약 동일한 Resource 에 대해 한개 이상의 Role 맵핑 추가인 경우 
             // 이전 resourceKey 에 현재 새로 계산된 Role 맵핑 리스트로 덮어쓰게 됨.

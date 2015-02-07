@@ -36,6 +36,10 @@ public class Initialization {
 		author.setAuthorityCode("ROLE_USER");
 		author.setName("유저 권한");
 		
+		Authority author2 = new Authority();
+		author2.setAuthorityCode("ROLE_ADMIN");
+		author2.setName("어드민 권한");
+		
 		User user = new User();
 		user.setId("user1");
 		user.setPassword(passwordEncoder.encode("user1"));
@@ -44,20 +48,30 @@ public class Initialization {
 		user.setDescription("Master");
 		user.setEmail("kofwhgh@gmail.com");
 		user.addAuthority(author);
-		
 		userService.saveUser(user);
+		
+		User user2 = new User();
+		user2.setId("user2");
+		user2.setPassword(passwordEncoder.encode("user2"));
+		user2.setName("Cho Ho Young");
+		user2.setUseFlag("0");
+		user2.setDescription("Master");
+		user2.setEmail("kofwhgh@gmail.com");
+		user2.addAuthority(author2);
+		userService.saveUser(user2);
 	}
 	
 	public void initializeAuthority() {
-		Authority author = new Authority();
-		author.setAuthorityCode("ROLE_USER");
-		author.setName("유저 권한");
+		Authority author3 = new Authority();
+		author3.setAuthorityCode("ROLE_ANOY");
+		author3.setName("어두민 권한");
 		
 		SecureResource sr = new SecureResource();
 		sr.setName("albumUrlA");
 		sr.setPattern("/album/**");
 		sr.setType("url");
-		sr.addAuthority(author);
+		sr.addAuthority(author3);
 		secureResourceService.saveSecureResource(sr);
+		
 	}
 }
