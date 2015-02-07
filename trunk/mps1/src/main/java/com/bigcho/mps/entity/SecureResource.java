@@ -18,6 +18,7 @@ package com.bigcho.mps.entity;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -56,7 +57,7 @@ public class SecureResource {
 	@Column
 	private int sortOrder;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "tbl_secure_resource_authority", 
 	           joinColumns = { @JoinColumn(name = "resourceId") }, 
 	           inverseJoinColumns = { @JoinColumn(name = "authorityCode") })
