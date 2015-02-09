@@ -26,3 +26,4 @@ mpsApp.controller('mpsCtrl', ['$scope', '$http', '$location', function($scope, $
 		document.location.href = window.mps.contextPath + '/album/choutube';
 	};
 }]);
+
