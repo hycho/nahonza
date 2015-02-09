@@ -8,7 +8,7 @@
 	
     <http auto-config="true" use-expressions="true" create-session="never">
     	<access-denied-handler error-page="/login"/>
-    	<form-login login-page="/login" default-target-url="/" authentication-failure-url="/login?login=fail" />
+    	<form-login login-page="/login" default-target-url="/main" authentication-failure-url="/login?login=fail" />
     	<custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="filterSecurityInterceptor"/>
     </http>
     
