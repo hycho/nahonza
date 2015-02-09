@@ -45,6 +45,7 @@
         <script src="${resourcePath}/js/plugins/angularjs/angular.min-1.3.8.js" type="text/javascript"></script>
         <script src="${resourcePath}/js/plugins/angularjs/angular-resource.js" type="text/javascript"></script>
         <script src="${resourcePath}/js/plugins/angularjs/angular-route.js" type="text/javascript"></script>
+        <script src="${resourcePath}/js/plugins/angularjs/angular-animate.min.js" type="text/javascript"></script>
         
         <!-- Morris.js charts -->
         <script src="${resourcePath}/js/plugins/raphael/raphael-min.js"></script>
@@ -122,17 +123,17 @@
                     <!-- /.search form -->
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                        <li class="active">
+                        <li>
                             <a href="${contextPath}/dashboard/main">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="#" ng-click="moveChoutube()">
                                 <i class="fa fa-laptop"></i> <span>Choutube</span>
                             </a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="${contextPath}/album/list">
                                 <i class="fa fa-laptop"></i> <span>Album</span>
                             </a>
@@ -142,25 +143,25 @@
                                 <i class="fa fa-th"></i> <span>Widgets</span> <small class="badge pull-right bg-green">new</small>
                             </a>
                         </li>
-                        <li class="treeview">
+                        <li class="treeview" ng-class="{'active': mpsMenu.sideSlideMenu == 'charts'}" ng-click="mpsMenu.sideSlideMenu = 'charts'">
                             <a href="#">
                                 <i class="fa fa-bar-chart-o"></i>
                                 <span>Charts</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
-                            <ul class="treeview-menu">
+                            <ul class="treeview-menu animate-show" ng-show="mpsMenu.sideSlideMenu == 'charts'">
                                 <li><a href="pages/charts/morris.html"><i class="fa fa-angle-double-right"></i> Morris</a></li>
                                 <li><a href="pages/charts/flot.html"><i class="fa fa-angle-double-right"></i> Flot</a></li>
                                 <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Inline charts</a></li>
                             </ul>
                         </li>
-                        <li class="treeview">
+                        <li class="treeview" ng-class="{'active': mpsMenu.sideSlideMenu == 'uiElement'}" ng-click="mpsMenu.sideSlideMenu = 'uiElement'">
                             <a href="#">
                                 <i class="fa fa-laptop"></i>
                                 <span>UI Elements</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
-                            <ul class="treeview-menu">
+                            <ul class="treeview-menu animate-show" ng-show="mpsMenu.sideSlideMenu == 'uiElement'">
                                 <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> General</a></li>
                                 <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Icons</a></li>
                                 <li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Buttons</a></li>
@@ -168,23 +169,23 @@
                                 <li><a href="pages/UI/timeline.html"><i class="fa fa-angle-double-right"></i> Timeline</a></li>
                             </ul>
                         </li>
-                        <li class="treeview">
+                        <li class="treeview" ng-class="{'active': mpsMenu.sideSlideMenu == 'forms'}" ng-click="mpsMenu.sideSlideMenu = 'forms'">
                             <a href="#">
                                 <i class="fa fa-edit"></i> <span>Forms</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
-                            <ul class="treeview-menu">
+                            <ul class="treeview-menu animate-show" ng-show="mpsMenu.sideSlideMenu == 'forms'">
                                 <li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i> General Elements</a></li>
                                 <li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i> Advanced Elements</a></li>
                                 <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Editors</a></li>
                             </ul>
                         </li>
-                        <li class="treeview">
+                        <li class="treeview" ng-class="{'active': mpsMenu.sideSlideMenu == 'Tables'}" ng-click="mpsMenu.sideSlideMenu = 'Tables'">
                             <a href="#">
                                 <i class="fa fa-table"></i> <span>Tables</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
-                            <ul class="treeview-menu">
+                            <ul class="treeview-menu animate-show" ng-show="mpsMenu.sideSlideMenu == 'Tables'">
                                 <li><a href="pages/tables/simple.html"><i class="fa fa-angle-double-right"></i> Simple tables</a></li>
                                 <li><a href="pages/tables/data.html"><i class="fa fa-angle-double-right"></i> Data tables</a></li>
                             </ul>
@@ -201,12 +202,12 @@
                                 <small class="badge pull-right bg-yellow">12</small>
                             </a>
                         </li>
-                        <li class="treeview">
+                        <li class="treeview" ng-class="{'active': mpsMenu.sideSlideMenu == 'Examples'}" ng-click="mpsMenu.sideSlideMenu = 'Examples'">
                             <a href="#">
                                 <i class="fa fa-folder"></i> <span>Examples</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
-                            <ul class="treeview-menu">
+                            <ul class="treeview-menu animate-show" ng-show="mpsMenu.sideSlideMenu == 'Examples'">
                                 <li><a href="pages/examples/invoice.html"><i class="fa fa-angle-double-right"></i> Invoice</a></li>
                                 <li><a href="pages/examples/login.html"><i class="fa fa-angle-double-right"></i> Login</a></li>
                                 <li><a href="pages/examples/register.html"><i class="fa fa-angle-double-right"></i> Register</a></li>

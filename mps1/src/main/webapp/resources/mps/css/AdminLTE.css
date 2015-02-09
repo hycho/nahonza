@@ -655,7 +655,6 @@ body > .header .logo .icon {
   width: 20px;
 }
 .sidebar .sidebar-menu .treeview-menu {
-  display: none;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -3534,4 +3533,25 @@ fieldset[disabled] .btn-vk.active {
 .btn-vk .badge {
   color: #587ea3;
   background-color: #ffffff;
+}
+
+/*
+AngularJs Animation Setting
+*/
+.animate-show {
+  line-height: 20px;
+  opacity: 1;
+  padding: 10px;
+  background: white;
+}
+
+.animate-show.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transition: all linear 0.5s;
+  transition: all linear 0.5s;
+}
+
+.animate-show.ng-hide {
+  line-height: 0;
+  opacity: 0;
+  padding: 0 10px;
 }
