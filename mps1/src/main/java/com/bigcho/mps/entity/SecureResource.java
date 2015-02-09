@@ -57,7 +57,7 @@ public class SecureResource {
 	@Column
 	private int sortOrder;
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToMany(cascade=CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinTable(name = "tbl_secure_resource_authority", 
 	           joinColumns = { @JoinColumn(name = "resourceId") }, 
 	           inverseJoinColumns = { @JoinColumn(name = "authorityCode") })
