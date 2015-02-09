@@ -1,8 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<c:set var="resourcePath" value="${pageContext.request.contextPath}/resources" />
+<%@include file="/WEB-INF/views/common/common.jsp" %>
 
 <html ng-app="mpsApp">
     <head>
@@ -77,7 +73,7 @@
         <header class="header">
             <a href="index.html" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
-                AdminLTE
+                Chouve
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -107,7 +103,7 @@
                             <img src="${resourcePath}/img/avatar3.png" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
-                            <p>Hello, Jane</p>
+                            <p>Hello <%=name %></p>
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
                     </div>
@@ -123,11 +119,25 @@
                     <!-- /.search form -->
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
+                        <li class="treeview" ng-class="{'active': mpsMenu.sideSlideMenu == 'functions'}" ng-click="mpsMenu.sideSlideMenu = 'functions'">
+                            <a href="#">
+                                <i class="fa fa-th"></i>
+                                <span>Functions</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu animate-show" ng-show="mpsMenu.sideSlideMenu == 'functions'">
+                                <li>
+                                	<a href="${contextPath}/album/list"><i class="fa fa-angle-double-right"></i> Choutube Album <small class="badge pull-right bg-green">new</small></a>
+                                </li>
+                            </ul>
+                        </li>
+                        
                         <li>
                             <a href="${contextPath}/dashboard/main">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
+                        <!-- 
                         <li>
                             <a href="#" ng-click="moveChoutube()">
                                 <i class="fa fa-laptop"></i> <span>Choutube</span>
@@ -138,6 +148,7 @@
                                 <i class="fa fa-laptop"></i> <span>Album</span>
                             </a>
                         </li>
+                        -->
                         <li>
                             <a href="pages/widgets.html">
                                 <i class="fa fa-th"></i> <span>Widgets</span> <small class="badge pull-right bg-green">new</small>

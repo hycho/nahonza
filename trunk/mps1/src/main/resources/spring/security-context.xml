@@ -10,6 +10,10 @@
     	<access-denied-handler error-page="/login"/>
     	<form-login login-page="/login" default-target-url="/main" authentication-failure-url="/login?login=fail" />
     	<custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="filterSecurityInterceptor"/>
+    	
+    	<session-management>
+        	<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+    	</session-management>
     </http>
     
     <authentication-manager>

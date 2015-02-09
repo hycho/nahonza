@@ -15,6 +15,7 @@
  */
 package com.bigcho.mps.entity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -24,6 +25,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -51,4 +54,17 @@ public class Album {
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "album_id")
 	private Collection<Youtube> youtubes;
+	
+	@ManyToMany(cascade=CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinTable(name = "tbl_user_album", 
+	           joinColumns = { @JoinColumn(name = "albumId") }, 
+	           inverseJoinColumns = { @JoinColumn(name = "userId") })
+	private Collection<User> users;
+	
+	public void addUser(User user) {
+		if(this.users == null) {
+			this.users = new ArrayList<User>();
+		}
+		this.users.add(user);
+	}
 }

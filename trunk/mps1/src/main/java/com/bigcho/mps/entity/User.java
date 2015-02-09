@@ -96,6 +96,19 @@ public class User implements UserDetails{
 	           inverseJoinColumns = { @JoinColumn(name = "groupId") })
 	private Collection<Group> groups;
 	
+	@ManyToMany(cascade=CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinTable(name = "tbl_user_album", 
+	           joinColumns = { @JoinColumn(name = "userId") }, 
+	           inverseJoinColumns = { @JoinColumn(name = "albumId") })
+	private Collection<Album> albums;
+	
+	public void addAuthority(Authority authority) {
+		if(this.authorities == null) {
+			this.authorities = new ArrayList<Authority>();
+		}
+		this.authorities.add(authority);
+	}
+	
 	@PrePersist
 	private void onCreate() {
 		setCreatedDate(new Date());
@@ -106,13 +119,6 @@ public class User implements UserDetails{
 		setUpdatedDate(new Date());
 	}
 	
-	public void addAuthority(Authority authority) {
-		if(this.authorities == null) {
-			this.authorities = new ArrayList<Authority>();
-		}
-		this.authorities.add(authority);
-	}
-
 	@Override
 	public String getUsername() {
 		return id;
