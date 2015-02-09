@@ -26,9 +26,7 @@ public class Initialization {
 	
 	@PostConstruct
     public void initialize() {
-		//init regist u
-		initializeUser();
-		initializeAuthority();
+		//initializeUser();
     }
 	
 	public void initializeUser() {
@@ -59,19 +57,13 @@ public class Initialization {
 		user2.setEmail("kofwhgh@gmail.com");
 		user2.addAuthority(author2);
 		userService.saveUser(user2);
-	}
-	
-	public void initializeAuthority() {
-		Authority author3 = new Authority();
-		author3.setAuthorityCode("ROLE_ANOY");
-		author3.setName("어두민 권한");
 		
 		SecureResource sr = new SecureResource();
 		sr.setName("albumUrlA");
 		sr.setPattern("/album/**");
 		sr.setType("url");
-		sr.addAuthority(author3);
+		sr.addAuthority(author2);
 		secureResourceService.saveSecureResource(sr);
-		
 	}
+
 }
