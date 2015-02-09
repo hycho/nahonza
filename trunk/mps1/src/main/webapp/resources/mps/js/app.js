@@ -1,4 +1,4 @@
-var mpsApp = angular.module('mpsApp', ['ngResource', 'ngRoute', 'albumApp']);
+var mpsApp = angular.module('mpsApp', ['ngResource', 'ngRoute', 'ngAnimate', 'albumApp']);
 
 mpsApp.config(function($routeProvider, $locationProvider) {
 	$locationProvider.html5Mode({
@@ -18,7 +18,24 @@ mpsApp.config(function($routeProvider, $locationProvider) {
 
 
 mpsApp.controller('mpsCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
+	$scope.mpsMenu = {
+		sideSlideMenu : '-1'
+	};
+	
 	$scope.moveChoutube = function() {
 		document.location.href = window.mps.contextPath + '/album/choutube';
 	};
 }]);
+
+/*
+mpsApp.directive('slideMenu', function() {
+	return {
+		restrict : 'A',
+		link : function($scope, elem, attrs) {
+			elem.children('.treeview').on("click", function(treeView){ 
+				
+			});
+		}
+	}
+});
+*/
