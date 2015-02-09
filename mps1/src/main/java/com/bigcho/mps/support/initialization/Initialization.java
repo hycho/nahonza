@@ -26,18 +26,14 @@ public class Initialization {
 	
 	@PostConstruct
     public void initialize() {
-		//initializeUser();
+		initializeUser();
     }
 	
 	public void initializeUser() {
 		Authority author = new Authority();
 		author.setAuthorityCode("ROLE_USER");
 		author.setName("유저 권한");
-		
-		Authority author2 = new Authority();
-		author2.setAuthorityCode("ROLE_ADMIN");
-		author2.setName("어드민 권한");
-		
+				
 		User user = new User();
 		user.setId("user1");
 		user.setPassword(passwordEncoder.encode("user1"));
@@ -47,23 +43,20 @@ public class Initialization {
 		user.setEmail("kofwhgh@gmail.com");
 		user.addAuthority(author);
 		userService.saveUser(user);
-		
-		User user2 = new User();
-		user2.setId("user2");
-		user2.setPassword(passwordEncoder.encode("user2"));
-		user2.setName("Cho Ho Young");
-		user2.setUseFlag("0");
-		user2.setDescription("Master");
-		user2.setEmail("kofwhgh@gmail.com");
-		user2.addAuthority(author2);
-		userService.saveUser(user2);
-		
+				
 		SecureResource sr = new SecureResource();
-		sr.setName("albumUrlA");
-		sr.setPattern("/album/**");
+		sr.setName("main author");
+		sr.setPattern("/main");
 		sr.setType("url");
-		sr.addAuthority(author2);
+		sr.addAuthority(author);
 		secureResourceService.saveSecureResource(sr);
+		
+		SecureResource sr1 = new SecureResource();
+		sr1.setName("main author");
+		sr1.setPattern("/album/**");
+		sr1.setType("url");
+		sr1.addAuthority(author);
+		secureResourceService.saveSecureResource(sr1);
 	}
 
 }

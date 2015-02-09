@@ -3,7 +3,9 @@ package com.bigcho.mps.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,12 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bigcho.mps.entity.Album;
+import com.bigcho.mps.entity.User;
 import com.bigcho.mps.service.AlbumService;
+import com.bigcho.mps.service.UserService;
 import com.bigcho.mps.service.YoutubeService;
 
 @Controller
 @RequestMapping(value = "/album")
 public class AlbumController {
+	
+	@Resource(name = "userService")
+	private UserService userService;
 	
 	@Resource(name = "albumService")
 	private AlbumService albumService;
@@ -27,7 +34,7 @@ public class AlbumController {
 	private YoutubeService youtubeService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list() {
+	public String list(HttpSession session) {
 		return "/album/list";
 	}
 	
@@ -39,6 +46,9 @@ public class AlbumController {
 	
 	@RequestMapping(value = "/saveAlbum", method = RequestMethod.POST)
 	public @ResponseBody Album saveAlbum(@RequestBody Album album) {
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	    album.addUser(user);
+	    
 		return albumService.saveAlbum(album);
 	}
 	
