@@ -54,7 +54,13 @@ public class AlbumController {
 	
 	@RequestMapping(value = "/findAllAlbumList", method = RequestMethod.POST)
 	public @ResponseBody List<Album> findAllAlbumList() {
-		return albumService.findAllAlbumList();
+		List<Album> a = albumService.findAllAlbumList();
+		
+		for(Album ac : a) {
+			System.out.println(ac.getAlbumId());
+		}
+		
+		return a;
 	}
 	
 	@RequestMapping(value = "/findByAlbumId", method = RequestMethod.POST)
