@@ -34,6 +34,8 @@ import lombok.Data;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Data
 @Entity
 @Table(name="tbl_album")

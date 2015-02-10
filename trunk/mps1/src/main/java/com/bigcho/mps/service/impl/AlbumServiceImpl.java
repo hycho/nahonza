@@ -1,5 +1,6 @@
 package com.bigcho.mps.service.impl;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bigcho.mps.entity.Album;
+import com.bigcho.mps.entity.User;
 import com.bigcho.mps.repository.AlbumRepository;
 import com.bigcho.mps.service.AlbumService;
 
@@ -40,4 +42,5 @@ public class AlbumServiceImpl implements AlbumService {
 	public Album findByAlbumId(String albumId) {
 		return 	albumRep.findByAlbumId(albumId);
 	}
+	
 }

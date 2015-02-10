@@ -47,14 +47,19 @@ public class AlbumController {
 	@RequestMapping(value = "/saveAlbum", method = RequestMethod.POST)
 	public @ResponseBody Album saveAlbum(@RequestBody Album album) {
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	    album.addUser(user);
+		User oUser = userService.findUserByUserId(user.getUserId());
+		oUser.addAlbum(album);
+		userService.saveUser(oUser);
 	    
-		return albumService.saveAlbum(album);
+		return album;
 	}
 	
 	@RequestMapping(value = "/findAllAlbumList", method = RequestMethod.POST)
 	public @ResponseBody List<Album> findAllAlbumList() {
-		List<Album> a = albumService.findAllAlbumList();
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	    User oUser = userService.findUserByUserId(user.getUserId());
+		
+		List<Album> a = (List<Album>) oUser.getAlbums(); 
 		
 		for(Album ac : a) {
 			System.out.println(ac.getAlbumId());
