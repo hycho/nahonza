@@ -55,10 +55,7 @@ public class Album {
 	@JoinColumn(name = "album_id")
 	private Collection<Youtube> youtubes;
 	
-	@ManyToMany(cascade=CascadeType.MERGE, fetch = FetchType.LAZY)
-	@JoinTable(name = "tbl_user_album", 
-	           joinColumns = { @JoinColumn(name = "albumId") }, 
-	           inverseJoinColumns = { @JoinColumn(name = "userId") })
+	@ManyToMany(cascade=CascadeType.MERGE, mappedBy="albums")
 	private Collection<User> users;
 	
 	public void addUser(User user) {

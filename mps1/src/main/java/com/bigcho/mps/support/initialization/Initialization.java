@@ -26,7 +26,7 @@ public class Initialization {
 	
 	@PostConstruct
     public void initialize() {
-		initializeUser();
+		//initializeUser();
     }
 	
 	public void initializeUser() {
