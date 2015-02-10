@@ -38,6 +38,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Data
 @Entity
 @Table(name="tbl_user")
@@ -107,6 +109,13 @@ public class User implements UserDetails{
 			this.authorities = new ArrayList<Authority>();
 		}
 		this.authorities.add(authority);
+	}
+	
+	public void addAlbum(Album album) {
+		if(this.albums == null) {
+			this.albums = new ArrayList<Album>();
+		}
+		this.albums.add(album);
 	}
 	
 	@PrePersist
