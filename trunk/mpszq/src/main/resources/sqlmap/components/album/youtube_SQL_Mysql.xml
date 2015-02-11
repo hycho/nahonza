@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="youtubeDao">
+
+	<select id="findAllYoutubes" parameterType="java.util.Map" resultType="java.util.HashMap">
+		select youtubeId, playId, title, albumId from tbl_youtube
+	</select>
+	
+	<select id="findYoutubesByAlbumId" parameterType="java.util.Map" resultType="java.util.HashMap">
+		select youtubeId, playId, title, albumId 
+		from tbl_youtube
+		where albumId = #{albumId}
+	</select>
+	
+	<insert id="saveYoutube" parameterType="java.util.Map">
+		INSERT INTO tbl_youtube(youtubeId, playId, title, albumId)
+		VALUES (
+			#{youtubeId},
+			#{playId},
+			#{title},
+			#{albumId}
+		)
+		ON DUPLICATE KEY UPDATE
+		<trim prefix="SET" suffixOverrides=",">
+  			<if test="playId != null">playId=#{playId},</if>
+  			<if test="title != null">title=#{title},</if>
+  			<if test="albumId != null">albumId=#{albumId},</if>
+		</trim>
+	</insert>
+	
+</mapper>
