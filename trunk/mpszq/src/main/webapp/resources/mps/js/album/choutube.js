@@ -255,6 +255,7 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
 	    } else {
 	    	album['youtubes'] = VideosService.getUpcoming();
 	    }
+		console.log("#######################");
 		console.log(album);
 		
 		asyncHttpService.httpPostJson(window.mps.contextPath + '/album/saveAlbum', album, function(data) {
@@ -313,9 +314,9 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
     };
     
     $scope.bindByAlbum = function(albumId) {
-    	asyncHttpService.httpPost(window.mps.contextPath + '/album/findByAlbumId', {'albumId':albumId}, function(data) {
-    		VideosService.setAlbum(data);
-    		angular.forEach(data.youtubes, function(value) {
+    	asyncHttpService.httpPost(window.mps.contextPath + '/youtube/findYoutubesByAlbumId', {'albumId':albumId}, function(data) {
+    		VideosService.setAlbum({'albumId' : albumId});
+    		angular.forEach(data, function(value) {
     			VideosService.queueVideo(value.playId, value.title, value.youtubeId);
     		});
     	});

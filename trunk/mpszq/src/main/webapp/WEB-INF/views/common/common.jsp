@@ -4,7 +4,7 @@
 
 <%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
 <%@ page import="org.springframework.security.core.Authentication" %>
-<%@ page import="com.bigcho.mps.entity.User" %>
+<%@ page import="com.bigcho.mps.support.security.entity.User" %>
 
 <%
 Authentication auth = SecurityContextHolder.getContext().getAuthentication();

@@ -16,24 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bigcho.mps.application.album.service.AlbumService;
-import com.bigcho.mps.application.album.service.YoutubeService;
-import com.bigcho.mps.application.user.service.UserService;
 import com.bigcho.mps.support.security.entity.User;
-
-
 
 @Controller
 @RequestMapping(value = "/album")
 public class AlbumController {
-	
-	@Resource(name = "userService")
-	private UserService userService;
-	
+
 	@Resource(name = "albumService")
 	private AlbumService albumService;
-	
-	@Resource(name = "youtubeService")
-	private YoutubeService youtubeService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(HttpSession session) {
@@ -53,8 +43,8 @@ public class AlbumController {
 		return albumService.saveAlbum(params);
 	}
 	
-	@RequestMapping(value = "/findAllAlbumList", method = RequestMethod.POST)
-	public @ResponseBody List<Map<String, Object>> findAllAlbumList(@RequestBody Map<String, Object> params) {
+	@RequestMapping(value = "/findAllAlbumList", method =  {RequestMethod.POST, RequestMethod.GET})
+	public @ResponseBody List<Map<String, Object>> findAllAlbumList() {
 		return albumService.findAllAlbums();
 	}
 	

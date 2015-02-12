@@ -24,8 +24,7 @@ albumApp.factory('albumService', function(asyncHttpService) {
 	service.albumList = [];
 	
 	service.findAllAlbumList = function(params, callback) {
-		alert("D");
-		asyncHttpService.httpPost(window.mps.contextPath + '/user/findAlbumByUserId', params, function(data) {
+		asyncHttpService.httpPost(window.mps.contextPath + '/album/findAllAlbumList', params, function(data) {
 			service.albumList = data;
 			console.log(data);
 		});
