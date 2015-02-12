@@ -234,8 +234,8 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
 	
 	$scope.save = function() {
 		var album = VideosService.getAlbum(); 
-		console.log(VideosService.getAlbum().albumId);
-		if(typeof VideosService.getAlbum().albumId == 'undefined' || VideosService.getAlbum().albumId == '') {
+		
+		if(typeof album['albumId'] == 'undefined' || album['albumId'] == '') {
 	    	var title = prompt("Please enter your album title", "sr-71");
 	    	
 	    	if(title == null) {
@@ -255,10 +255,9 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
 	    } else {
 	    	album['youtubes'] = VideosService.getUpcoming();
 	    }
-		console.log("#######################");
-		console.log(album);
 		
 		asyncHttpService.httpPostJson(window.mps.contextPath + '/album/saveAlbum', album, function(data) {
+			VideosService.setAlbum(data);
 			alert("complete save");
 		});
 	};
@@ -314,10 +313,12 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
     			VideosService.queueVideo(value.playId, value.title, value.youtubeId);
     		});
     	});
-    	
-    	asyncHttpService.httpPost(window.mps.contextPath + '/album/findAllAlbumsByAlbumId', {'albumId':albumId}, function(data) {
-    		VideosService.setAlbum(data[0]);
-    	});
+    	    	
+    	if(typeof albumId != "undefined" && albumId != "") {
+	    	asyncHttpService.httpPost(window.mps.contextPath + '/album/findAlbumByAlbumId', {'albumId':albumId}, function(data) {
+	    		VideosService.setAlbum(data);
+	    	});
+    	}
     };
     
     init();

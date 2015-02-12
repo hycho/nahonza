@@ -34,7 +34,7 @@
 	            <div class="lockscreen-item">
 	                <div class="lockscreen-credentials">
 	                    <div class="input-group">
-	                        <input type="text" name="j_username" class="form-control" placeholder="User Id" />
+	                        <input type="text" name="j_username" class="form-control" placeholder="User Id" value="user1" />
 	                        <div class="input-group-btn">
 	                            <button class="btn btn-flat"><i class="fa fa-arrow-right text-muted"></i></button>
 	                        </div>
@@ -45,7 +45,7 @@
 	            <div class="lockscreen-item">
 	                <div class="lockscreen-credentials">
 	                    <div class="input-group">
-	                        <input type="password" name="j_password" class="form-control" placeholder="password" />
+	                        <input type="password" name="j_password" class="form-control" placeholder="password" value="user1"/>
 	                        <div class="input-group-btn">
 	                            <button class="btn btn-flat"><i class="fa fa-arrow-right text-muted"></i></button>
 	                        </div>

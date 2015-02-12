@@ -5,10 +5,32 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
   	
+  	<beans:bean id="accessDenied" class="com.bigcho.mps.support.security.handler.AccessHandlerWithAjax">
+		<!-- <beans:property name="errorPage" value="/admin/error302" /> -->
+		<beans:property name="errorPage" value="/mps/login" />
+	</beans:bean>
 	
-    <http auto-config="true" use-expressions="true" create-session="never">
-    	<access-denied-handler error-page="/login"/>
-    	<form-login login-page="/login" default-target-url="/main" authentication-failure-url="/login?login=fail" />
+	<beans:bean id="authEntryPoint" class="com.bigcho.mps.support.security.handler.LoginUrlAuthenticationEntryPointWithAjax">
+		<beans:property name="loginFormUrl" value="/login" />
+	</beans:bean>
+	
+	<beans:bean id="plusAuthenticationSuccessHandler" class="com.bigcho.mps.support.security.handler.PlusAuthenticationSuccessHandler">
+		<beans:property name="rfisem" ref="reloadableFilterInvocationSecurityMetadataSource" />
+	</beans:bean>
+	
+    <http auto-config="true" entry-point-ref="authEntryPoint" use-expressions="true" >
+    	<access-denied-handler ref="accessDenied"/>
+    	
+    	<form-login 
+    		login-page="/login" 
+    		default-target-url="/main" 
+    		always-use-default-target="true" 
+    		authentication-failure-url="/login?login=fail" 
+    		authentication-success-handler-ref="plusAuthenticationSuccessHandler"	
+    	/>
+    	
+    	<logout logout-success-url="/login" delete-cookies="JSESSIONID" invalidate-session="true"/>
+    	
     	<custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="filterSecurityInterceptor"/>
     	
     	<session-management>

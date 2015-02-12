@@ -25,13 +25,16 @@ public class AlbumServiceImpl implements AlbumService {
     
 	@Override
 	@Transactional(value = "transactionManager", rollbackFor=Exception.class)
-	public int saveAlbum(Map<String, Object> params) {
-		int result = 0;
+	public Map<String, Object> saveAlbum(Map<String, Object> params) {
+		String result = "";
 		if(params.get("albumId") == null || ((String) params.get("albumId")).equals("")) {	//uuid를 userKey(userId)로 잡고 있으며 만약 존재 하지 않을 경우 새로운 Insert건으로 파악 uuid를 생성해서 넘겨준다.
 			params.put("albumId", UUID.randomUUID().toString());
 		}
 		
 		albumDao.saveAlbum(params);
+		if(params.get("userId") != null && !params.get("userId").equals("")) {
+			albumDao.saveUserAlbum(params);
+		}
 		
 		youtubeDao.removeYoutubeByAlbumId(params);
 		
@@ -41,10 +44,10 @@ public class AlbumServiceImpl implements AlbumService {
 				youtube.put("youtubeId", UUID.randomUUID().toString());
 			}
 			youtube.put("albumId", params.get("albumId"));
-			result = youtubeDao.saveYoutube(youtube);
+			youtubeDao.saveYoutube(youtube);
 		}
 
-		return result;
+		return albumDao.findAlbumByAlbumId(params);
 	}
 	
 	@Override
@@ -60,7 +63,7 @@ public class AlbumServiceImpl implements AlbumService {
 	}
 
 	@Override
-	public List<Map<String, Object>> findAllAlbumsByAlbumId(Map<String, Object> params) {
-		return 	albumDao.findAllAlbumsByAlbumId(params);
+	public Map<String, Object> findAlbumByAlbumId(Map<String, Object> params) {
+		return 	albumDao.findAlbumByAlbumId(params);
 	}
 }

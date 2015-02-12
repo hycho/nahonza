@@ -1,5 +1,6 @@
 package com.bigcho.mps.application.album.contoller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,9 +38,10 @@ public class AlbumController {
 	}
 	
 	@RequestMapping(value = "/saveAlbum", method = RequestMethod.POST)
-	public @ResponseBody int saveAlbum(@RequestBody Map<String, Object> params) {
+	public @ResponseBody Map<String, Object> saveAlbum(@RequestBody Map<String, Object> params) {
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		params.put("userId", user.getUserId());
+		Map<String, Object> result = new HashMap<String, Object>();
 		return albumService.saveAlbum(params);
 	}
 	
@@ -48,9 +50,9 @@ public class AlbumController {
 		return albumService.findAllAlbums();
 	}
 	
-	@RequestMapping(value = "/findAllAlbumsByAlbumId", method =  {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody List<Map<String, Object>> findAllAlbumsByAlbumId(@RequestParam Map<String, Object> params) {
-		return albumService.findAllAlbumsByAlbumId(params);
+	@RequestMapping(value = "/findAlbumByAlbumId", method =  {RequestMethod.POST, RequestMethod.GET})
+	public @ResponseBody Map<String, Object> findAllAlbumsByAlbumId(@RequestParam Map<String, Object> params) {
+		return albumService.findAlbumByAlbumId(params);
 	}
 	
 	@RequestMapping(value = "/findAlbumsByUserId", method = RequestMethod.POST)

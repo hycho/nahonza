@@ -16,7 +16,7 @@
 		<task:scheduled ref="myBean" method="printMessage" fixed-delay="5000" initial-delay="1000" />
 		<task:scheduled ref="Bean2" method="method2" fixed-rate="5000" /> 
 		-->
-		<task:scheduled ref="top100MelonPucher" method="printAnotherMessage" cron="30 12 12 * * *" />
+		<task:scheduled ref="top100MelonPucher" method="printAnotherMessage" cron="00 28 19 * * *" />
 	</task:scheduled-tasks>
 
 </beans>
