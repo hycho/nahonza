@@ -68,7 +68,7 @@
 		</ol>
 		<p id="tabs">
 			<a class="green" data-ng-click="save()">Save</a>
-			<a class="blue" data-ng-click="recommend()">Recommend</a>
+			<a class="blue" data-ng-click="download()">DownLoad</a>
 		</p>
 	</div>
 	<script src="${resourcePath}/js/plugins/jquery/jquery-2.1.3.min.js" type="text/javascript"></script>

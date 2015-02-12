@@ -262,6 +262,13 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
 		});
 	};
 	
+	$scope.download = function() {
+		var albumId = VideosService.getAlbum()['albumId'];
+		asyncHttpService.httpPost(window.mps.contextPath + '/album/albumDownload', {'albumId':albumId}, function(data) {
+    		console.log(data);
+    	});
+	};
+	
 	$scope.saveAs = function() {
 		
 	};
