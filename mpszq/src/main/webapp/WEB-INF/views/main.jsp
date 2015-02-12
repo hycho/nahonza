@@ -127,7 +127,10 @@
                             </a>
                             <ul class="treeview-menu animate-show" ng-show="mpsMenu.sideSlideMenu == 'functions'">
                                 <li>
-                                	<a href="${contextPath}/album/list"><i class="fa fa-angle-double-right"></i> Choutube Album <small class="badge pull-right bg-green">new</small></a>
+                                	<a href="${contextPath}/album/list"><i class="fa fa-angle-double-right"></i> Choutube Music <small class="badge pull-right bg-green">new</small></a>
+                                </li>
+                                <li>
+                                	<a href="${contextPath}/album/dubeList"><i class="fa fa-angle-double-right"></i> Choutube Drama <small class="badge pull-right bg-green">new</small></a>
                                 </li>
                             </ul>
                         </li>

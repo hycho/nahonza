@@ -15,7 +15,7 @@
 		AND ua.userId = #{userId}
 	</select>
 	
-	<select id="findAllAlbumsByAlbumId" parameterType="java.util.Map" resultType="java.util.HashMap">
+	<select id="findAlbumByAlbumId" parameterType="java.util.Map" resultType="java.util.HashMap">
 		select albumId, description, title, type from tbl_album
 		where albumId = #{albumId}
 	</select>
@@ -33,6 +33,15 @@
   			<if test="description != null">description=#{description},</if>
   			<if test="title != null">title=#{title},</if>
   			<if test="type != null">type=#{type},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveUserAlbum" parameterType="java.util.Map">
+		INSERT INTO tbl_user_album(albumId, userId)
+		VALUES (#{albumId}, #{userId})
+		ON DUPLICATE KEY UPDATE
+		<trim suffixOverrides=",">
+  			<if test="userId != null">userId=#{userId},</if>
 		</trim>
 	</insert>
 	
