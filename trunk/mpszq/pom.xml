@@ -23,7 +23,7 @@
 		<org.reflections-version>0.9.9-RC1</org.reflections-version>
 		<org.aspectj-version>1.8.1</org.aspectj-version>
 		<org.springframework.security-version>3.2.5.RELEASE</org.springframework.security-version>
-		
+
 	</properties>
 
 
@@ -69,7 +69,7 @@
 			<artifactId>spring-test</artifactId>
 			<version>${org.springframework.spring-version}</version>
 		</dependency>
-		
+
 		<!-- mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -194,6 +194,12 @@
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20141113</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.4</version>
 		</dependency>
 
 		<!-- Junit 사용 - 현재 사용 안함 -->
