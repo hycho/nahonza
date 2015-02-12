@@ -28,7 +28,7 @@
             <form action="/mps/j_spring_security_check" method="post">
                 <div class="body bg-gray">
                     <div class="form-group">
-                        <input type="text" name="j_username" class="form-control" placeholder="User ID"/>
+                        <input type="text" name="j_username" class="form-control" placeholder="User ID" value="user1"/>
                     </div>
                     <div class="form-group">
                         <input type="password" name="j_password" class="form-control" placeholder="Password"/>

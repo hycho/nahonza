@@ -22,7 +22,7 @@
 			#{albumId}
 		)
 		ON DUPLICATE KEY UPDATE
-		<trim prefix="SET" suffixOverrides=",">
+		<trim suffixOverrides=",">
   			<if test="playId != null">playId=#{playId},</if>
   			<if test="title != null">title=#{title},</if>
   			<if test="albumId != null">albumId=#{albumId},</if>

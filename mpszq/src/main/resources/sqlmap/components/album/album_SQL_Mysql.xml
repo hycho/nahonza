@@ -21,10 +21,10 @@
 			#{albumId},
 			#{description},
 			#{title},
-			#{type}
+			'01'
 		)
 		ON DUPLICATE KEY UPDATE
-		<trim prefix="SET" suffixOverrides=",">
+		<trim suffixOverrides=",">
   			<if test="description != null">description=#{description},</if>
   			<if test="title != null">title=#{title},</if>
   			<if test="type != null">type=#{type},</if>

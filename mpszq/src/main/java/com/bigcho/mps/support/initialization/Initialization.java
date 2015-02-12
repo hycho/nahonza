@@ -1,27 +1,23 @@
 package com.bigcho.mps.support.initialization;
 
-import java.util.UUID;
-
 import javax.annotation.PostConstruct;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Initialization {
-	@Autowired
-	BCryptPasswordEncoder passwordEncoder;
+	//@Autowired
+	//BCryptPasswordEncoder passwordEncoder;
 	
 	@PostConstruct
     public void initialize() {
-		initializeUser();
+	//	initializeUser();
     }
 	
 	public void initializeUser() {
 		
 		
-		UUID.randomUUID().toString();
+		//UUID.randomUUID().toString();
 		
 		/*
 		Authority author = new Authority();
