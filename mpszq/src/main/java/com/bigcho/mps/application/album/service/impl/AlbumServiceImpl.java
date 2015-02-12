@@ -33,6 +33,8 @@ public class AlbumServiceImpl implements AlbumService {
 		
 		albumDao.saveAlbum(params);
 		
+		youtubeDao.removeYoutubeByAlbumId(params);
+		
 		List<Map<String, Object>> youtubes = (List<Map<String, Object>>) params.get("youtubes");
 		for(Map<String, Object> youtube : youtubes) {
 			if(youtube.get("youtubeId") == null || ((String) youtube.get("youtubeId")).equals("")) {	//uuid를 userKey(userId)로 잡고 있으며 만약 존재 하지 않을 경우 새로운 Insert건으로 파악 uuid를 생성해서 넘겨준다.
@@ -55,5 +57,10 @@ public class AlbumServiceImpl implements AlbumService {
 	@Transactional(value = "transactionManager", rollbackFor=Exception.class)
 	public List<Map<String, Object>> findAlbumsByUserId(Map<String, Object> params) {
 		return 	albumDao.findAlbumsByUserId(params);
+	}
+
+	@Override
+	public List<Map<String, Object>> findAllAlbumsByAlbumId(Map<String, Object> params) {
+		return 	albumDao.findAllAlbumsByAlbumId(params);
 	}
 }

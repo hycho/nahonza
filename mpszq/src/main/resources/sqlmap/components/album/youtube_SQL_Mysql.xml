@@ -29,4 +29,9 @@
 		</trim>
 	</insert>
 	
+	<delete id="removeYoutubeByAlbumId" parameterType="java.util.Map">
+		DELETE FROM tbl_youtube
+		WHERE albumId = #{albumId}
+	</delete>
+	
 </mapper>

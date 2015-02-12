@@ -48,6 +48,11 @@ public class AlbumController {
 		return albumService.findAllAlbums();
 	}
 	
+	@RequestMapping(value = "/findAllAlbumsByAlbumId", method =  {RequestMethod.POST, RequestMethod.GET})
+	public @ResponseBody List<Map<String, Object>> findAllAlbumsByAlbumId(@RequestParam Map<String, Object> params) {
+		return albumService.findAllAlbumsByAlbumId(params);
+	}
+	
 	@RequestMapping(value = "/findAlbumsByUserId", method = RequestMethod.POST)
 	public @ResponseBody List<Map<String, Object>> findByAlbumId(@RequestBody Map<String, Object> params) {
 		return albumService.findAlbumsByUserId(params);
