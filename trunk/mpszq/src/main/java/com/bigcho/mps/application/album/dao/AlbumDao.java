@@ -25,4 +25,8 @@ public class AlbumDao extends BaseSqlSessionDaoSupport {
 		return getSqlSession().insert("albumDao.saveAlbum", params);
 	}
 	
+	public List<Map<String, Object>> findAllAlbumsByAlbumId(Map<String, Object> params) {
+		return getSqlSession().selectList("albumDao.findAllAlbumsByAlbumId", params);
+	}
+	
 }

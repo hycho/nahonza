@@ -25,4 +25,8 @@ public class YoutubeDao extends BaseSqlSessionDaoSupport {
 		return getSqlSession().insert("youtubeDao.saveYoutube", params);
 	}
 	
+	public int removeYoutubeByAlbumId(Map<String, Object> params) {
+		return getSqlSession().insert("youtubeDao.removeYoutubeByAlbumId", params);
+	}
+	
 }

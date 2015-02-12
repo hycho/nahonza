@@ -15,6 +15,11 @@
 		AND ua.userId = #{userId}
 	</select>
 	
+	<select id="findAllAlbumsByAlbumId" parameterType="java.util.Map" resultType="java.util.HashMap">
+		select albumId, description, title, type from tbl_album
+		where albumId = #{albumId}
+	</select>
+	
 	<insert id="saveAlbum" parameterType="java.util.Map">
 		INSERT INTO tbl_album(albumId, description, title, type)
 		VALUES (

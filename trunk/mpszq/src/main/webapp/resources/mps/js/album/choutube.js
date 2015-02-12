@@ -259,11 +259,6 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
 		console.log(album);
 		
 		asyncHttpService.httpPostJson(window.mps.contextPath + '/album/saveAlbum', album, function(data) {
-			VideosService.deleteAll();
-			VideosService.setAlbum(data);
-    		angular.forEach(data.youtubes, function(value) {
-    			VideosService.queueVideo(value.playId, value.title, value.youtubeId);
-    		});
 			alert("complete save");
 		});
 	};
@@ -315,10 +310,13 @@ choutubeApp.controller('VideosController', function ($scope, $http, $log, Videos
     
     $scope.bindByAlbum = function(albumId) {
     	asyncHttpService.httpPost(window.mps.contextPath + '/youtube/findYoutubesByAlbumId', {'albumId':albumId}, function(data) {
-    		VideosService.setAlbum({'albumId' : albumId});
     		angular.forEach(data, function(value) {
     			VideosService.queueVideo(value.playId, value.title, value.youtubeId);
     		});
+    	});
+    	
+    	asyncHttpService.httpPost(window.mps.contextPath + '/album/findAllAlbumsByAlbumId', {'albumId':albumId}, function(data) {
+    		VideosService.setAlbum(data[0]);
     	});
     };
     
