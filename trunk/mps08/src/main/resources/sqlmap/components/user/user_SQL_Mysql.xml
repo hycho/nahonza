@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="userDao">
+	<select id="findUserByUserId" parameterType="java.util.Map" resultType="java.util.HashMap">
+		SELECT userId, createdDate, description, email, id, name, password, updatedDate, useFlag
+		FROM tbl_user
+		WHERE userId = #{userId}
+	</select>
+	
+	<insert id="saveUser" parameterType="java.util.Map">
+		INSERT INTO tbl_user(userId, createdDate, description, email, id, name, password, updatedDate, useFlag)
+		VALUES (
+			#{userId},
+			NOW(),
+			#{description},
+			#{email},
+			#{id},
+			#{name},
+			#{password},
+			NOW(),
+			#{useFlag}
+		)
+		ON DUPLICATE KEY UPDATE
+		<trim prefix="SET" suffixOverrides=",">
+  			<if test="userId != null">userId=#{userId},</if>
+  			<if test="description != null">description=#{description},</if>
+  			<if test="email != null">email=#{email},</if>
+  			<if test="id != null">id=#{id},</if>
+  			<if test="name != null">name=#{name},</if>
+  			<if test="password != null">password=#{password},</if>
+  			<if test="useFlag != null">useFlag=#{useFlag},</if>
+  			updatedDate=NOW(),
+		</trim>
+	</insert>
+</mapper>

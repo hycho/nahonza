@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="albumDao">
+
+	<select id="findAllAlbums" parameterType="java.util.Map" resultType="java.util.HashMap">
+		select albumId, description, title, type from tbl_album
+	</select>
+	
+	<select id="findAlbumsByUserId" parameterType="java.util.Map" resultType="java.util.HashMap">
+		SELECT 
+			a.albumId, a.description, a.title, a.type
+		FROM tbl_album a, tbl_user_album ua
+		WHERE a.albumId = ua.albumId
+		AND ua.userId = #{userId}
+	</select>
+	
+	<select id="findAlbumByAlbumId" parameterType="java.util.Map" resultType="java.util.HashMap">
+		select albumId, description, title, type from tbl_album
+		where albumId = #{albumId}
+	</select>
+	
+	<insert id="saveAlbum" parameterType="java.util.Map">
+		INSERT INTO tbl_album(albumId, description, title, type)
+		VALUES (
+			#{albumId},
+			#{description},
+			#{title},
+			'01'
+		)
+		ON DUPLICATE KEY UPDATE
+		<trim suffixOverrides=",">
+  			<if test="description != null">description=#{description},</if>
+  			<if test="title != null">title=#{title},</if>
+  			<if test="type != null">type=#{type},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveUserAlbum" parameterType="java.util.Map">
+		INSERT INTO tbl_user_album(albumId, userId)
+		VALUES (#{albumId}, #{userId})
+		ON DUPLICATE KEY UPDATE
+		<trim suffixOverrides=",">
+  			<if test="userId != null">userId=#{userId},</if>
+		</trim>
+	</insert>
+	
+</mapper>
