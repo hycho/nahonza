@@ -29,8 +29,6 @@ public class AccessHandlerWithAjax implements AccessDeniedHandler{
 			HttpServletResponse response,
 			AccessDeniedException accessDeniedException) throws IOException, ServletException {
 		
-		System.out.println("########################################################");
-		System.out.println(request.getRequestURL());
 		String ajaxHeader = request.getHeader("X-Ajax-call"); // Ajax로 호출한 서비스인지 확인 한다.
 		String result = "";
 		

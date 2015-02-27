@@ -1,6 +1,6 @@
-var mpsApp = angular.module('mpsApp', ['ngResource', 'ngRoute', 'ngAnimate', 'albumApp']);
+var myhomeApp = angular.module('myhomeApp', ['ngResource', 'ngRoute', 'ngAnimate', 'albumApp', 'userManageApp']);
 
-mpsApp.config(function($routeProvider, $locationProvider) {
+myhomeApp.config(function($routeProvider, $locationProvider) {
 	$locationProvider.html5Mode({
 		enabled: true,
 		requireBase: false
@@ -10,6 +10,10 @@ mpsApp.config(function($routeProvider, $locationProvider) {
 		templateUrl: window.mps.contextPath + '/album/list'
 	});
 	
+	$routeProvider.when(window.mps.contextPath + '/userManage/list', {
+		templateUrl: window.mps.contextPath + '/userManage/list'
+	});
+	
 	$routeProvider.otherwise({
 		templateUrl: window.mps.contextPath + '/dashboard/main'
 	});
@@ -17,7 +21,7 @@ mpsApp.config(function($routeProvider, $locationProvider) {
 });
 
 
-mpsApp.controller('mpsCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
+myhomeApp.controller('myhomeAppCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
 	$scope.mpsMenu = {
 		sideSlideMenu : '-1'
 	};

@@ -25,4 +25,9 @@ public class HomeController {
 		return "pages/login";
 	}
 	
+	@RequestMapping(value = "/regist", method = RequestMethod.GET)
+	public String regist(Locale locale, Model model) {
+		return "pages/regist";
+	}
+	
 }

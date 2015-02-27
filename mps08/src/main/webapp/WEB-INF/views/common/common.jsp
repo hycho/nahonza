@@ -19,3 +19,13 @@ if(principal != null && principal instanceof User){
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:set var="resourcePath" value="${pageContext.request.contextPath}/resources" />
+
+<!-- init Script -->
+<script type="text/javascript">
+	if (!window.mps) {
+ 		window.mps = {
+ 			contextPath : '${contextPath}',
+ 			resourcePath : '${resourcePath}'
+ 		}
+ 	}
+</script>

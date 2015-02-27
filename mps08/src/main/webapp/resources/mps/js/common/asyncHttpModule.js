@@ -14,7 +14,7 @@ asyncHttpModule.factory('asyncHttpService', function($q, $http, $rootScope) {
 	 */
 	asyncHttpService.httpPost = function(url, params, callback) {
 		params = params||{};
-		console.log($.param(params));
+
 		$http.post(url, $.param(params), {
 	    }).success(function(data, status) {
 	    	if(callback) {
