@@ -1,243 +1,499 @@
 <%@include file="/WEB-INF/views/common/common.jsp" %>
 
-<html ng-app="mpsApp">
-    <head>
-        <meta charset="UTF-8">
-        <title>MPS | Dashboard</title>
-        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-        <link href="${resourcePath}/css/bootstrap/bootstrap.css" rel="stylesheet" type="text/css" />
-        <link href="${resourcePath}/css/font-awesome/font-awesome.css" rel="stylesheet" type="text/css" />
-        <!-- Ionicons -->
-        <link href="${resourcePath}/css/ionicons/ionicons.css" rel="stylesheet" type="text/css" />
-        <!-- Morris chart -->
-        <link href="${resourcePath}/css/morris/morris.css" rel="stylesheet" type="text/css" />
-        <!-- jvectormap -->
-        <link href="${resourcePath}/css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-        <!-- Date Picker -->
-        <link href="${resourcePath}/css/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
-        <!-- Daterange picker -->
-        <link href="${resourcePath}/css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
-        <!-- bootstrap wysihtml5 - text editor -->
-        <link href="${resourcePath}/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
-        <!-- Theme style -->
-        <link href="${resourcePath}/css/AdminLTE.css" rel="stylesheet" type="text/css" />
-        
-        <!-- init Script -->
-        <script type="text/javascript">
-	        if (!window.mps) {
-	        	window.mps = {
-	        		contextPath : '${contextPath}',
-	        		resourcePath : '${resourcePath}'
-	        	}
-	        }
-        </script>
-        
-        <!-- add new calendar event modal -->
-        <script src="${resourcePath}/js/plugins/jquery/jquery-2.1.3.min.js" type="text/javascript"></script>
-        <script src="${resourcePath}/js/plugins/bootstrap/bootstrap.min.js" type="text/javascript"></script>
-        <script src="${resourcePath}/js/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-        
-        <!-- angular Js -->
-        <script src="${resourcePath}/js/plugins/angularjs/angular.min-1.3.8.js" type="text/javascript"></script>
-        <script src="${resourcePath}/js/plugins/angularjs/angular-resource.js" type="text/javascript"></script>
-        <script src="${resourcePath}/js/plugins/angularjs/angular-route.js" type="text/javascript"></script>
-        <script src="${resourcePath}/js/plugins/angularjs/angular-animate.min.js" type="text/javascript"></script>
-        
-        <!-- Morris.js charts -->
-        <script src="${resourcePath}/js/plugins/raphael/raphael-min.js"></script>
-        <script src="${resourcePath}/js/plugins/morris/morris.min.js" type="text/javascript"></script>
-        <!-- Sparkline -->
-        <script src="${resourcePath}/js/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
-        <!-- jvectormap -->
-        <script src="${resourcePath}/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
-        <script src="${resourcePath}/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
-        <!-- jQuery Knob Chart -->
-        <script src="${resourcePath}/js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
-        <!-- daterangepicker -->
-        <script src="${resourcePath}/js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-        <!-- datepicker -->
-        <script src="${resourcePath}/js/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
-        <!-- Bootstrap WYSIHTML5 -->
-        <script src="${resourcePath}/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
-        <!-- iCheck -->
-        <script src="${resourcePath}/js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
-        <!-- app -->
-        <script src="${resourcePath}/js/app.js" type="text/javascript"></script>
-        <script src="${resourcePath}/js/album/albumController.js" type="text/javascript"></script>
-        <script src="${resourcePath}/js/common/asyncHttpModule.js" type="text/javascript"></script>
-        
-        
-    </head>
-    <body class="skin-blue" ng-controller="mpsCtrl">
-        <!-- header logo: style can be found in header.less -->
-        <header class="header">
-            <a href="index.html" class="logo">
-                <!-- Add the class icon to your logo image or logo icon to add the margining -->
-                Chouve
-            </a>
-            <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top" role="navigation">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <div class="navbar-right">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown messages-menu">
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <div class="wrapper row-offcanvas row-offcanvas-left">
-            <!-- Left side column. contains the logo and sidebar -->
-            <aside class="left-side sidebar-offcanvas">
-                <!-- sidebar: style can be found in sidebar.less -->
-                <section class="sidebar">
-                    <!-- Sidebar user panel -->
-                    <div class="user-panel">
-                        <div class="pull-left image">
-                            <img src="${resourcePath}/img/avatar3.png" class="img-circle" alt="User Image" />
+<html ng-app="mainApp">
+<head>
+<title>ChouHoo</title>
+<link href="${resourcePath}/css/bootstrap/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="${resourcePath}/css/chouHoo.css" rel="stylesheet" type="text/css" />
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--webfont-->
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<script src="${resourcePath}/js/plugins/jquery/jquery-2.1.3.min.js" type="text/javascript"></script>
+<script src="${resourcePath}/js/plugins/easydropdown/jquery.easydropdown.js" type="text/javascript"></script>
+<script src="${resourcePath}/js/plugins/angularjs/angular.min-1.3.8.js" type="text/javascript"></script>
+
+<script src="${resourcePath}/js/app-main.js" type="text/javascript"></script>
+<script src="${resourcePath}/js/album/albumController.js" type="text/javascript"></script>
+<script src="${resourcePath}/js/common/asyncHttpModule.js" type="text/javascript"></script>
+
+</head>
+<body ng-controller="mainCtrl">
+<div class="header">
+	<div class="col-sm-8 header-left">
+		<div class="logo">
+			<a href="${contextPath}/main" class="logo">
+        		<span class="logo-text">Chouve</span>
+        	</a>	
+	 	</div>
+	 	<div class="menu">
+			<a class="toggleMenu" href="#"><img src="${resourcePath}/img/nav.png" alt="" /></a>
+		    	<ul class="nav" id="nav">
+		    		<sec:authorize access="isAuthenticated()">
+		    		<li  class="active"><a href="${contextPath}/myhome/main">MyHome</a></li>
+		    		</sec:authorize>
+		    		<li><a href="#">Music</a></li>
+		    		<li><a href="living.html">Listen</a></li>
+		    		<li><a href="education.html">Event</a></li>
+		    		<li><a href="entertain.html">Charts</a></li>
+					<div class="clearfix"></div>
+				</ul>
+				<script type="text/javascript" src="${resourcePath}/js/main/responsive-nav.js"></script>
+    	</div>	
+     	<!-- start search-->
+      	<div class="search-box">
+			<div id="sb-search" class="sb-search">
+				<form>
+					<input class="sb-search-input" placeholder="Enter your search contents..." type="search" name="search" id="search">
+					<input class="sb-search-submit" type="submit" value="">
+					<span class="sb-icon-search"> </span>
+				</form>
+			</div>
+		</div>
+		<!----search-scripts---->
+		<script src="${resourcePath}/js/main/classie.js"></script>
+		<script src="${resourcePath}/js/main/uisearch.js"></script>
+		<script>
+			new UISearch( document.getElementById( 'sb-search' ) );
+		</script>
+		<!----//search-scripts---->						
+ 		<div class="clearfix"></div>
+	</div>
+	<div class="col-sm-4 header_right">
+		<div id="loginContainer">
+		<sec:authorize access="!isAuthenticated()">
+			<a id="loginButton" ng-click="flags.viewLogin = 'true'"><img src="${resourcePath}/img/login.png"><span>Login</span></a>
+			<div id="loginBox" ng-show="flags.viewLogin == 'true'">
+				<form name="loginForm" id="loginForm" method="POST" action="<c:url value='/j_spring_security_check' />">
+					<fieldset id="body">
+						<fieldset>
+							<label for="email">User ID</label> 
+							<input type="text" name="j_username" placeholder="UserId">
+						</fieldset>
+						<fieldset>
+							<label for="password">Password</label> 
+							<input type="password" name="j_password" id="password" placeholder="Password">
+						</fieldset>
+						<input type="submit" id="login" value="Login"> 
+						<label for="checkbox"><input type="checkbox" id="checkbox">
+						<i>Remember me</i></label>
+					</fieldset>
+					<span><a href="${contextPath}/regist">Regist your Account</a></span>
+					<span><a>Sign up for Chouve</a></span>
+				</form>
+			</div>
+		</sec:authorize>
+		<sec:authorize access="isAuthenticated()">
+			<a href="/mps/j_spring_security_logout" id="loginButton"><img src="${resourcePath}/img/login.png"><span>Logout</span></a>
+		</sec:authorize>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+
+<div class="banner">
+	<div class="container_wrap">
+		<h1>What are you looking for?</h1>
+		<div class="dropdown-buttons">
+			<div class="dropdown-button">
+				<select class="dropdown" tabindex="9" data-settings='{"wrapperClass":"flat"}'>
+					<option value="0">Music Album</option>
+				</select>
+			</div>
+			<div class="dropdown-button">
+				<select class="dropdown" tabindex="9" data-settings='{"wrapperClass":"flat"}'>
+					<option value="0">Youtube</option>
+				</select>
+			</div>
+		</div>
+		<form>
+			<input type="text" value="Keyword, name, date, ..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Keyword, name, date, ...';}" />
+			<div class="contact_btn">
+				<label class="btn1 btn-2 btn-2g">
+				<input name="submit" type="submit" id="submit" value="Search">
+				</label>
+			</div>
+		</form>
+		<div class="clearfix"></div>
+	</div>
+</div>
+<div class="content_top">
+	<div class="container">
+		<div class="col-md-4 bottom_nav">
+			<div class="content_menu">
+				<ul>
+					<li class="active"><a href="#">Recommended</a></li>
+					<li><a href="#">Latest</a></li>
+					<li><a href="#">Highlights</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-4 content_dropdown1">
+			<div class="content_dropdown">
+				<select class="dropdown" tabindex="10" data-settings='{"wrapperClass":"metro"}'>
+					<option value="0">Youtube</option>
+				</select>
+			</div>
+			<div class="content_dropdown">
+				<select class="dropdown" tabindex="10" data-settings='{"wrapperClass":"metro"}'>
+					<option value="0">Roy</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-md-4 filter_grid">
+			<ul class="filter">
+				<li class="fil">Filter :</li>
+				<li><a href=""> <i class="icon1"> </i></a></li>
+				<li><a href=""> <i class="icon2"> </i></a></li>
+				<li><a href=""> <i class="icon3"> </i></a></li>
+				<li><a href=""> <i class="icon4"> </i></a></li>
+				<li><a href=""> <i class="icon5"> </i></a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+	
+<div class="content_middle">
+	<div class="container">
+   		<div class="content_middle_box">
+        	<!-- top 4 layout -->
+        	<div class="top_grid">
+        		<!-- top 4 layout item-->
+	   			<div class="col-md-3" ng-repeat="album in publicMusicAlbum">
+					<div class="grid1">
+						<div class="view view-first">
+							<div class="index_img1">
+								<img src="${resourcePath}/img/pic6.jpg" class="img-responsive" alt="" />
+							</div>
+							<div class="mask" ng-click="clickAlbum(album.albumId)">
+								<div class="info">
+									<i class="search"> </i> Show More
+								</div>
+								<ul class="mask_img">
+									<li class="star"><img src="${resourcePath}/img/star.png" alt="" /></li>
+									<li class="set"><img src="${resourcePath}/img/set.png" alt="" /></li>
+									<div class="clearfix"></div>
+								</ul>
+							</div>
+						</div>
+						<i class="home1"> </i>
+						<div class="inner_wrap">
+							<h3 class="ellipsis220" alt="{{album.title}}">{{album.title}}</h3>
+							<ul class="star1">
+								<h4 class="yellow">Youtube Album</h4>
+								<li><a href="#"> <img src="${resourcePath}/img/star2.png" alt="">(136)</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- top 4 layout item-->
+   			<div class="clearfix"> </div>
+   		</div>
+   		<!-- top 4 layout -->
+   	    <div class="middle_grid wow fadeInUp" data-wow-delay="0.4s">
+   			<div class="col-md-6">
+   			   <div class="grid1">
+   			     <div class="index_img"><img src="${resourcePath}/img/pic4.jpg" class="img-responsive" alt=""/></div>
+   				  <i class="m_home"> </i>
+                  <ul class="vision">
+                  	 <li>Vision Agency</li>
+                  	 <li class="desc"><a href="#"> <img src="${resourcePath}/img/star1.png" alt="">(236)</a></li>
+                  </ul>
+   				  <div class="inner_wrap1">
+   				 	<ul class="item_module">
+   				 	 	<li class="module_left"><img src="${resourcePath}/img/m1.jpg" class="img-responsive" alt=""/></li>
+   				 	 	<li class="module_right">
+   				 	 		<img src="${resourcePath}/img/m_star.png" class="img-responsive" alt=""/>
+   				 	 		<h5>Lucy-p</h5>
+   				 	 		<p>"Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat."</p>
+   				 	 		<a href="#" class="content_btn">....read more</a>
+   				 	 	</li>
+   				 	 	<div class="clearfix"> </div>
+   				 	 </ul>
+   				  </div>
+   			   </div>
+   			</div>
+   			<div class="col-md-6">
+   			   <div class="grid1">
+   			     <div class="index_img1"><img src="${resourcePath}/img/pic5.jpg" class="img-responsive" alt=""/></div>
+   				  <i class="m_home1"> </i>
+                  <ul class="vision">
+                  	 <li>Vision Agency</li>
+                  	 <li class="desc"><a href="#"> <img src="${resourcePath}/img/star2.png" alt="">(236)</a></li>
+                  </ul>
+   				  <div class="inner_wrap1">
+   				 	<ul class="item_module">
+   				 	 	<li class="module_left"><img src="${resourcePath}/img/m2.jpg" class="img-responsive" alt=""/></li>
+   				 	 	<li class="module_right">
+   				 	 		<img src="${resourcePath}/img/m_star1.png" class="img-responsive" alt=""/>
+   				 	 		<h5>Lucy-p</h5>
+   				 	 		<p>"Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat."</p>
+   				 	 		<a href="#" class="content_btn">....read more</a>
+   				 	 	</li>
+   				 	 	<div class="clearfix"> </div>
+   				 	 </ul>
+   				  </div>
+   			   </div>
+   			</div>
+   			<div class="clearfix"> </div>
+   		</div>
+   		<div class="top_grid wow fadeInRight" data-wow-delay="0.4s">
+   			<div class="col-md-3">
+   			  <div class="grid1">
+   				<div class="view view-first">
+                  <div class="index_img"><img src="${resourcePath}/img/pic1.jpg" class="img-responsive" alt=""/></div>
+   				     <div class="sale">$2.980</div>
+   			          <div class="mask">
+                       <div class="info"><i class="search"> </i> Show More</div>
+                        <ul class="mask_img">
+                        	<li class="star"><img src="${resourcePath}/img/star.png" alt=""/></li>
+                        	<li class="set"><img src="${resourcePath}/img/set.png" alt=""/></li>
+                        	<div class="clearfix"> </div>
+                        </ul>
                         </div>
-                        <div class="pull-left info">
-                            <p>Hello <%=name %></p>
-                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                        </div>
-                    </div>
-                    <!-- search form -->
-                    <form action="#" method="get" class="sidebar-form">
-                        <div class="input-group">
-                            <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                            <span class="input-group-btn">
-                                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-                            </span>
-                        </div>
-                    </form>
-                    <!-- /.search form -->
-                    <!-- sidebar menu: : style can be found in sidebar.less -->
-                    <ul class="sidebar-menu">
-                        <li class="treeview" ng-class="{'active': mpsMenu.sideSlideMenu == 'functions'}" ng-click="mpsMenu.sideSlideMenu = 'functions'">
-                            <a href="#">
-                                <i class="fa fa-th"></i>
-                                <span>Functions</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu animate-show" ng-show="mpsMenu.sideSlideMenu == 'functions'">
-                                <li>
-                                	<a href="${contextPath}/album/list"><i class="fa fa-angle-double-right"></i> Choutube Music <small class="badge pull-right bg-green">new</small></a>
-                                </li>
-                                <li>
-                                	<a href="${contextPath}/album/dubeList"><i class="fa fa-angle-double-right"></i> Choutube Drama <small class="badge pull-right bg-green">new</small></a>
-                                </li>
-                            </ul>
-                        </li>
-                        
-                        <li>
-                            <a href="${contextPath}/dashboard/main">
-                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                            </a>
-                        </li>
-                        <!-- 
-                        <li>
-                            <a href="#" ng-click="moveChoutube()">
-                                <i class="fa fa-laptop"></i> <span>Choutube</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="${contextPath}/album/list">
-                                <i class="fa fa-laptop"></i> <span>Album</span>
-                            </a>
-                        </li>
-                        -->
-                        <li>
-                            <a href="pages/widgets.html">
-                                <i class="fa fa-th"></i> <span>Widgets</span> <small class="badge pull-right bg-green">new</small>
-                            </a>
-                        </li>
-                        <li class="treeview" ng-class="{'active': mpsMenu.sideSlideMenu == 'charts'}" ng-click="mpsMenu.sideSlideMenu = 'charts'">
-                            <a href="#">
-                                <i class="fa fa-bar-chart-o"></i>
-                                <span>Charts</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu animate-show" ng-show="mpsMenu.sideSlideMenu == 'charts'">
-                                <li><a href="pages/charts/morris.html"><i class="fa fa-angle-double-right"></i> Morris</a></li>
-                                <li><a href="pages/charts/flot.html"><i class="fa fa-angle-double-right"></i> Flot</a></li>
-                                <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Inline charts</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview" ng-class="{'active': mpsMenu.sideSlideMenu == 'uiElement'}" ng-click="mpsMenu.sideSlideMenu = 'uiElement'">
-                            <a href="#">
-                                <i class="fa fa-laptop"></i>
-                                <span>UI Elements</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu animate-show" ng-show="mpsMenu.sideSlideMenu == 'uiElement'">
-                                <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> General</a></li>
-                                <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Icons</a></li>
-                                <li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Buttons</a></li>
-                                <li><a href="pages/UI/sliders.html"><i class="fa fa-angle-double-right"></i> Sliders</a></li>
-                                <li><a href="pages/UI/timeline.html"><i class="fa fa-angle-double-right"></i> Timeline</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview" ng-class="{'active': mpsMenu.sideSlideMenu == 'forms'}" ng-click="mpsMenu.sideSlideMenu = 'forms'">
-                            <a href="#">
-                                <i class="fa fa-edit"></i> <span>Forms</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu animate-show" ng-show="mpsMenu.sideSlideMenu == 'forms'">
-                                <li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i> General Elements</a></li>
-                                <li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i> Advanced Elements</a></li>
-                                <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Editors</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview" ng-class="{'active': mpsMenu.sideSlideMenu == 'Tables'}" ng-click="mpsMenu.sideSlideMenu = 'Tables'">
-                            <a href="#">
-                                <i class="fa fa-table"></i> <span>Tables</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu animate-show" ng-show="mpsMenu.sideSlideMenu == 'Tables'">
-                                <li><a href="pages/tables/simple.html"><i class="fa fa-angle-double-right"></i> Simple tables</a></li>
-                                <li><a href="pages/tables/data.html"><i class="fa fa-angle-double-right"></i> Data tables</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="pages/calendar.html">
-                                <i class="fa fa-calendar"></i> <span>Calendar</span>
-                                <small class="badge pull-right bg-red">3</small>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="pages/mailbox.html">
-                                <i class="fa fa-envelope"></i> <span>Mailbox</span>
-                                <small class="badge pull-right bg-yellow">12</small>
-                            </a>
-                        </li>
-                        <li class="treeview" ng-class="{'active': mpsMenu.sideSlideMenu == 'Examples'}" ng-click="mpsMenu.sideSlideMenu = 'Examples'">
-                            <a href="#">
-                                <i class="fa fa-folder"></i> <span>Examples</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu animate-show" ng-show="mpsMenu.sideSlideMenu == 'Examples'">
-                                <li><a href="pages/examples/invoice.html"><i class="fa fa-angle-double-right"></i> Invoice</a></li>
-                                <li><a href="pages/examples/login.html"><i class="fa fa-angle-double-right"></i> Login</a></li>
-                                <li><a href="pages/examples/register.html"><i class="fa fa-angle-double-right"></i> Register</a></li>
-                                <li><a href="pages/examples/lockscreen.html"><i class="fa fa-angle-double-right"></i> Lockscreen</a></li>
-                                <li><a href="pages/examples/404.html"><i class="fa fa-angle-double-right"></i> 404 Error</a></li>
-                                <li><a href="pages/examples/500.html"><i class="fa fa-angle-double-right"></i> 500 Error</a></li>
-                                <li><a href="pages/examples/blank.html"><i class="fa fa-angle-double-right"></i> Blank Page</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </section>
-                <!-- /.sidebar -->
-            </aside>
-            
-	        <ng-view></ng-view>
-            
-        </div><!-- ./wrapper -->
-    </body>
+                    </div> 
+                    <i class="home"></i>
+   				 <div class="inner_wrap">
+   				 	<h3>2 bedroom house for rent in Dubai</h3>
+   				 	<ul class="star1">
+   				 	  <h4 class="green">Vision Agency</h4>
+   				 	  <li><a href="#"> <img src="${resourcePath}/img/star1.png" alt="">(236)</a></li>
+   				 	</ul>
+   				 </div>
+   			   </div>
+   			</div>
+   			<div class="col-md-3">
+   			  <div class="grid1">
+   				<div class="view view-first">
+                  <div class="index_img1"><img src="${resourcePath}/img/pic2.jpg" class="img-responsive" alt=""/></div>
+   				     <div class="mask">
+                        <div class="info"><i class="search"> </i> Show More</div>
+                        <ul class="mask_img">
+                        	<li class="star"><img src="${resourcePath}/img/star.png" alt=""/></li>
+                        	<li class="set"><img src="${resourcePath}/img/set.png" alt=""/></li>
+                        	<div class="clearfix"> </div>
+                        </ul>
+                      </div>
+                  </div> 
+                 <i class="home1"> </i>
+   				 <div class="inner_wrap">
+   				 	<h3>2 bedroom house for rent in Dubai</h3>
+   				 	<ul class="star1">
+   				 	  <h4 class="yellow">Vision Agency</h4>
+   				 	  <li><a href="#"> <img src="${resourcePath}/img/star2.png" alt="">(136)</a></li>
+   				 	</ul>
+   				 </div>
+   			   </div>
+   			</div>
+   			<div class="col-md-3">
+   			  <div class="grid1">
+   				<div class="view view-first">
+                  <div class="index_img2"><img src="${resourcePath}/img/pic6.jpg" class="img-responsive" alt=""/></div>
+   				     <div class="mask">
+                        <div class="info"><i class="search"> </i> Show More</div>
+                        <ul class="mask_img">
+                        	<li class="star"><img src="${resourcePath}/img/star.png" alt=""/></li>
+                        	<li class="set"><img src="${resourcePath}/img/set.png" alt=""/></li>
+                        	<div class="clearfix"> </div>
+                        </ul>
+                      </div>
+                  </div> 
+                 <i class="home2"> </i>
+   				 <div class="inner_wrap">
+   				 	<h3>2 bedroom house for rent in Dubai</h3>
+   				 	<ul class="star1">
+   				 	  <h4 class="blue">Vision Agency</h4>
+   				 	  <li><a href="#"> <img src="${resourcePath}/img/star2.png" alt="">(136)</a></li>
+   				 	</ul>
+   				 </div>
+   			   </div>
+   			</div>
+   			<div class="col-md-3">
+   			  <div class="grid1">
+   				<div class="view view-first">
+                  <div class="index_img"><img src="${resourcePath}/img/pic3.jpg" class="img-responsive" alt=""/></div>
+   				     <div class="sale">$2.980</div>
+   			          <div class="mask">
+                      <div class="info"><i class="search"> </i> Show More</div>
+                        <ul class="mask_img">
+                        	<li class="star"><img src="${resourcePath}/img/star.png" alt=""/></li>
+                        	<li class="set"><img src="${resourcePath}/img/set.png" alt=""/></li>
+                        	<div class="clearfix"> </div>
+                        </ul>
+                      </div>
+                  </div> 
+                  <i class="home"></i>
+   				  <div class="inner_wrap">
+   				 	<h3>2 bedroom house for rent in Dubai</h3>
+   				 	<ul class="star1">
+   				 	  <h4 class="green">Vision Agency</h4>
+   				 	  <li><a href="#"> <img src="${resourcePath}/img/star1.png" alt="">(236)</a></li>
+   				 	</ul>
+   				  </div>
+   			   </div>
+   			</div>
+   			<div class="clearfix"> </div>
+   		</div>
+   		<div class="bottom_grid wow bounce" data-wow-delay="0.4s">
+   		  <div class="col-md-6">
+   			   <div class="grid1">
+   			     <div class="index_img1"><img src="${resourcePath}/img/pic5.jpg" class="img-responsive" alt=""/></div>
+   				  <i class="m_home1"> </i>
+                  <ul class="vision">
+                  	 <li>Vision Agency</li>
+                  	 <li class="desc"><a href="#"> <img src="${resourcePath}/img/star2.png" alt="">(236)</a></li>
+                  </ul>
+   				  <div class="inner_wrap1">
+   				 	<ul class="item_module">
+   				 	 	<li class="module_left"><img src="${resourcePath}/img/m2.jpg" class="img-responsive" alt=""/></li>
+   				 	 	<li class="module_right">
+   				 	 		<img src="${resourcePath}/img/m_star.png" class="img-responsive" alt=""/>
+   				 	 		<h5>Lucy-p</h5>
+   				 	 		<p>"Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat."</p>
+   				 	 		<a href="#" class="content_btn">....read more</a>
+   				 	 	</li>
+   				 	 	<div class="clearfix"> </div>
+   				 	 </ul>
+   				  </div>
+   			   </div>
+   			</div>
+   			<div class="col-md-3">
+   			  <div class="grid1">
+   				<div class="view view-first">
+                  <div class="index_img"><img src="${resourcePath}/img/pic3.jpg" class="img-responsive" alt=""/></div>
+   				     <div class="sale">$2.980</div>
+   			          <div class="mask">
+                      <div class="info"><i class="search"> </i> Show More</div>
+                        <ul class="mask_img">
+                        	<li class="star"><img src="${resourcePath}/img/star.png" alt=""/></li>
+                        	<li class="set"><img src="${resourcePath}/img/set.png" alt=""/></li>
+                        	<div class="clearfix"> </div>
+                        </ul>
+                      </div>
+                  </div> 
+                  <i class="b_home"></i>
+   				  <div class="inner_wrap2">
+   				 	<h3>2 bedroom house for rent in Dubai</h3>
+   				 	<ul class="star1">
+   				 	  <h4 class="green">Vision Agency</h4>
+   				 	  <li><a href="#"> <img src="${resourcePath}/img/star1.png" alt="">(236)</a></li>
+   				 	</ul>
+   				  </div>
+   			   </div>
+   			</div>
+   			<div class="col-md-3">
+   			  <div class="grid1">
+   				<div class="view view-first">
+                  <div class="index_img1"><img src="${resourcePath}/img/pic2.jpg" class="img-responsive" alt=""/></div>
+   				     <div class="mask">
+                        <div class="info"><i class="search"> </i> Show More</div>
+                        <ul class="mask_img">
+                        	<li class="star"><img src="${resourcePath}/img/star.png" alt=""/></li>
+                        	<li class="set"><img src="${resourcePath}/img/set.png" alt=""/></li>
+                        	<div class="clearfix"> </div>
+                        </ul>
+                      </div>
+                  </div> 
+                 <i class="b_home1"> </i>
+   				 <div class="inner_wrap2">
+   				 	<h3>2 bedroom house for rent in Dubai</h3>
+   				 	<ul class="star1">
+   				 	  <h4 class="yellow">Vision Agency</h4>
+   				 	  <li><a href="#"> <img src="${resourcePath}/img/star2.png" alt="">(136)</a></li>
+   				 	</ul>
+   				 </div>
+   			   </div>
+   			</div>
+   			<div class="clearfix"></div>
+   			</div>
+   		  </div>
+   		  <div class="offering">
+   		  	  <h2>What can DuHoot offer to you ?</h2>
+   		  	  <h3>Ut wisi enim ad minim veniam, quis</h3>
+   		  	  <ul class="icons wow fadeInUp" data-wow-delay="0.4s">
+   		  	  	 <li><i class="icon1"> </i><span class="one"> </span></li>
+   		  	  	 <li><i class="icon2"> </i><span class="two"> </span></li>
+   		  	  	 <li><i class="icon3"> </i><span class="three"> </span></li>
+   		  	  	 <li><i class="icon4"> </i><span class="four"> </span></li>
+   		  	  	 <li><i class="icon5"> </i></li>
+   		  	  </ul>
+   		  	  <div class="real">
+   		  	  	<h4>Reality</h4>
+   		  	  	<div class="col-sm-6">
+   		  	  	  <ul class="service_grid">
+   	   				<i class="s1"> </i>
+   	   				 <li class="desc1 wow fadeInRight" data-wow-delay="0.4s">
+   	   				   <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum</p>
+   	   				 </li>
+   	   				 <div class="clearfix"> </div>
+   	   			   </ul>
+   	   			 </div>
+   	   			 <div class="col-sm-6">
+   		  	  	  <ul class="service_grid">
+   	   				<i class="s2"> </i>
+   	   				 <li class="desc1 wow fadeInRight" data-wow-delay="0.4s">
+   	   				   <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum</p>
+   	   				 </li>
+   	   				 <div class="clearfix"> </div>
+   	   			   </ul>
+   	   			 </div>
+   	   			 <div class="clearfix"> </div>
+   	   			 </div>
+   		  	  </div>
+   		  </div>
+   	  </div>
+   </div>
+   <div class="footer">
+   	<div class="container">
+   	 <div class="footer_top">
+   	   <h3>Subscribe to our newsletter</h3>
+   	   <form>
+		<span>
+			<i><img src="${resourcePath}/img/mail.png" alt=""></i>
+		    <input type="text" value="Enter your email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your email';}">
+		    <label class="btn1 btn2 btn-2 btn-2g"> <input name="submit" type="submit" id="submit" value="Subscribe"> </label>
+		    <div class="clearfix"> </div>
+		</span>			 	    
+	   </form>
+	  </div>
+	  <div class="footer_grids">
+	     <div class="footer-grid">
+			<h4>Ipsum Quis</h4>
+			<ul class="list1">
+				<li><a href="contact.html">Contact</a></li>
+				<li><a href="#">Mirum est</a></li>
+				<li><a href="#">placerat facer</a></li>
+				<li><a href="#">claritatem</a></li>
+				<li><a href="#">sollemnes </a></li>
+			</ul>
+		  </div>
+		  <div class="footer-grid">
+			<h4>Quis Ipsum</h4>
+			<ul class="list1">
+				<li><a href="#">placerat facer</a></li>
+				<li><a href="#">claritatem</a></li>
+				<li><a href="#">sollemnes </a></li>
+				<li><a href="#">Claritas</a></li>
+				<li><a href="#">Mirum est</a></li>
+			</ul>
+		  </div>
+		  <div class="footer-grid last_grid">
+			<h4>Follow Us</h4>
+			<ul class="footer_social wow fadeInLeft" data-wow-delay="0.4s">
+			  <li><a href=""> <i class="fb"> </i> </a></li>
+			  <li><a href=""><i class="tw"> </i> </a></li>
+			  <li><a href=""><i class="google"> </i> </a></li>
+			  <li><a href=""><i class="u_tube"> </i> </a></li>
+		 	</ul>
+		 	<div class="copy wow fadeInRight" data-wow-delay="0.4s">
+              <p>&copy; Template by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+	        </div>
+		  </div>
+		  <div class="clearfix"> </div>
+	   </div>
+      </div>
+   </div>
+</body>
 </html>

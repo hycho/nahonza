@@ -12,7 +12,7 @@ albumApp.controller('albumListCtrl', ['$scope', '$http', '$location', 'asyncHttp
 	};
 	
 	function init() {
-		$scope.albumService.findAllAlbumList({});
+		$scope.albumService.findAllAlbumListT({});
 	};
 	
 	init();
@@ -23,10 +23,17 @@ albumApp.factory('albumService', function(asyncHttpService) {
 
 	service.albumList = [];
 	
-	service.findAllAlbumList = function(params, callback) {
+	service.findAllAlbumListT = function(params, callback) {
 		asyncHttpService.httpPost(window.mps.contextPath + '/album/findAllAlbumList', params, function(data) {
 			service.albumList = data;
-			console.log(data);
+		});
+	};
+	
+	service.findAllAlbumList = function(params, callback) {
+		asyncHttpService.httpPost(window.mps.contextPath + '/album/findAllAlbumList', params, function(data) {
+			if(callback){
+				callback(data);
+			}
 		});
 	};
 	
