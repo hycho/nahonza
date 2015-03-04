@@ -143,6 +143,13 @@
 			<version>${org.projectlombok.lombok-version}</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- HSQLDB  -->
+		<dependency>
+			<groupId>com.danidemi.jlubricant</groupId>
+			<artifactId>jlubricant-embeddable-hsql</artifactId>
+			<version>0.0.15</version>
+		</dependency>
 
 		<!-- Junit 사용 - 현재 사용 안함 -->
 		<dependency>
