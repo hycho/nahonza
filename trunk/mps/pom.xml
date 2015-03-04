@@ -146,11 +146,11 @@
 		
 		<!-- HSQLDB  -->
 		<dependency>
-			<groupId>com.danidemi.jlubricant</groupId>
-			<artifactId>jlubricant-embeddable-hsql</artifactId>
-			<version>0.0.15</version>
+			<groupId>hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>1.8.0.10</version>
 		</dependency>
-
+		
 		<!-- Junit 사용 - 현재 사용 안함 -->
 		<dependency>
 			<groupId>junit</groupId>
