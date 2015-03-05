@@ -15,7 +15,6 @@
 		<org.springframework.data.spring-data-jpa-version>1.7.0.RELEASE</org.springframework.data.spring-data-jpa-version>
 		<org.hibernate.core-version>4.3.8.Final</org.hibernate.core-version>
 		<org.projectlombok.lombok-version>1.14.8</org.projectlombok.lombok-version>
-		<javax.servlet-api-version>3.1.0</javax.servlet-api-version>
 		<com.fasterxml.jackson.core.jackson-databind-version>2.4.1</com.fasterxml.jackson.core.jackson-databind-version>
 		<org.codehaus.jackson.jackson-core-asl-version>1.9.12</org.codehaus.jackson.jackson-core-asl-version>
 		<org.codehaus.jackson.jackson-mapper-asl-version>1.9.12</org.codehaus.jackson.jackson-mapper-asl-version>
@@ -97,9 +96,16 @@
 		
 		<!-- servlet -->		
 		<dependency>
-		    <groupId>javax.servlet</groupId>
-		    <artifactId>javax.servlet-api</artifactId>
-		    <version>${javax.servlet-api-version}</version>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
 		</dependency>
 		
 		<!-- jstl -->
